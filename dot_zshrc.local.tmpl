@@ -32,7 +32,6 @@ SPACESHIP_VI_MODE_SHOW=false
 SPACESHIP_GIT_STATUS_PREFIX=" "
 SPACESHIP_GIT_STATUS_SUFFIX=""
 SPACESHIP_GIT_STATUS_COLOR="068"
-SPACESHIP_NODE_DEFAULT_VERSION=$(node --version)
 SPACESHIP_AWS_PREFIX=""
 SPACESHIP_AWS_SUFFIX=" "
 
@@ -53,6 +52,8 @@ bindkey "^[[3~" delete-char
 source ~/.zsh_plugins.sh
 export VOLTA_HOME=$HOME/.volta
 . $HOME/.asdf/asdf.sh
+
+SPACESHIP_NODE_DEFAULT_VERSION=$(node --version)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
