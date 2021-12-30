@@ -26,6 +26,8 @@ export VISUAL='nvim'
 export EDITOR="$VISUAL"
 export TZ_LIST='America/New_York,America/St_Johns,Etc/UTC'
 
+export VOLTA_HOME=$HOME/.volta
+
 SPACESHIP_PACKAGE_SHOW=false
 SPACESHIP_DOCKER_SHOW=false
 SPACESHIP_VI_MODE_SHOW=false
@@ -51,7 +53,6 @@ autoload -U +X bashcompinit && bashcompinit
 bindkey "^[[3~" delete-char
 
 source ~/.zsh_plugins.sh
-export VOLTA_HOME=$HOME/.volta
 . $HOME/.asdf/asdf.sh
 
 SPACESHIP_NODE_DEFAULT_VERSION=$(node --version)
