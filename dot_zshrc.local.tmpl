@@ -1,0 +1,56 @@
+$HOME/.local/bin/gpg-agent-relay start
+export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+
+# Secrets
+export NPM_TOKEN={{ pass "autovance/npm/read" }}
+export PAPERTRAIL_API_TOKEN={{ pass "autovance/papertrail" }}
+export GITHUB_TOKEN={{ pass "github/token/cli" }}
+export SNYK_TOKEN={{ pass "autovance/snyk" }}
+export BW_SESSION={{ pass "bitwarden/session" }}
+
+export VAULT_ADDR_PRODUCTION={{pass "autovance/vault/url/production" }}
+export VAULT_ADDR_STAGING={{pass "autovance/vault/url/staging" }}
+
+export VAULT_ADDR=$VAULT_ADDR_PRODUCTION
+export VAULT_CACERT=$AUTOVANCE/certificates/autovance.ca.cert.pem
+export AV_PUBLIC_KEY_PATH=/Users/matt/autovance/certificates/autovance.wild.cert.pem
+export AV_PRIVATE_KEY_PATH=/Users/matt/autovance/certificates/autovance.private.pem
+
+export RCRC=$HOME/autovance/dotfiles/rcrc
+
+export PATH="$PATH:/usr/local/go/bin"
+export GOPATH="$HOME/.go/"
+
+export VOLTA_HOME=$HOME/.volta
+. $HOME/.asdf/asdf.sh
+
+export PATH="$PATH:$VOLTA_HOME/bin:/home/matt/.local/bin:/Users/matt/Library/Python/3.6/bin/"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+plugins=(git npm aws)
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+autoload -U +X bashcompinit && bashcompinit
+bindkey "^[[3~" delete-char
+
+SPACESHIP_PACKAGE_SHOW=false
+SPACESHIP_DOCKER_SHOW=false
+SPACESHIP_VI_MODE_SHOW=false
+SPACESHIP_GIT_STATUS_PREFIX=" "
+SPACESHIP_GIT_STATUS_SUFFIX=""
+SPACESHIP_GIT_STATUS_COLOR="068"
+SPACESHIP_NODE_DEFAULT_VERSION=$(node --version)
+SPACESHIP_AWS_PREFIX=""
+SPACESHIP_AWS_SUFFIX=" "
+
+source ~/.zsh_plugins.sh
+
+export VISUAL='nvim'
+export EDITOR="$VISUAL"
+export TZ_LIST='America/New_York,America/St_Johns,Etc/UTC'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# eval $(thefuck --alias)
+
+# export LESS='-XFR'

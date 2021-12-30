@@ -1,0 +1,34 @@
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugs')
+
+Plug 'arcticicestudio/nord-vim'
+Plug 'pangloss/vim-javascript'
+
+Plug 'scrooloose/nerdtree' 
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+call plug#end()
+
+filetype on
+filetype indent plugin on
+au FileType gitcommit setlocal tw=72
+
+let g:nord_italic = 0
+let g:nord_underline = 1
+let g:nord_italic_comments = 0
+let g:nord_uniform_diff_background = 1
+
+set cursorline
+set number
+colorscheme nord
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif

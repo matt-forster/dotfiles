@@ -1,0 +1,19 @@
+[core]
+  pager = diff-so-fancy | less --tabs=4 -RFX
+  editor = nvim
+[pretty]
+  colored = format:%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset
+[user]
+  name = Matt Forster
+  email = hey@mattforster.ca
+  signingkey = 5DA07A957618798A 
+[commit]
+  gpgsign = true
+[alias]
+  rel = log origin/release-candidate...origin/main --pretty=colored --reverse
+  l =  log --pretty=colored --reverse -10
+  sweep = !git sync && git purge
+  cb = create-branch
+  db = delete-branch
+[init]
+	defaultBranch = main
