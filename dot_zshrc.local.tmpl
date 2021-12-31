@@ -1,8 +1,9 @@
 {{- if eq .chezmoi.hostname "matt-desk" }}
 # GPG Relay (Win only)
 
-$HOME/.local/bin/gpg-agent-relay start
-export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+${HOME}/.ssh/win-gpg-agent-relay.sh start
+export SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh
+
 {{- end }}
 
 # Secrets
