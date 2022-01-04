@@ -3,7 +3,7 @@
 alias projects='cd $HOME/projects'
 alias fire='dig +short txt istheinternetonfire.com'
 alias ip='curl https://ipinfo.io/ip'
-alias ch='chezmoi'
+alias dot='chezmoi'
 alias nv='nvim'
 alias ws-back='code ~/autovance/back.code-workspace'
 alias card='gpg --card-status'
