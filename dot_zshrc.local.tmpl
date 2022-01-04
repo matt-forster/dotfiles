@@ -3,7 +3,7 @@
 
 ${HOME}/.ssh/win-gpg-agent-relay.sh start
 export SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh
-card | ag --nocolor -o 'rsa4096/FD79F7B533DEACFB'
+card | ag --nocolor -o 'rsa4096/FD79F7B533DEACFB' | echo 'Card: '
 
 {{- end }}
 
