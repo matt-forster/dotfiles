@@ -12,7 +12,7 @@
 [alias]
   rel = log origin/release-candidate...origin/main --pretty=colored --reverse
   l =  log --pretty=colored --reverse -10
-  sweep = !git sync && git purge
+  sweep = !git sync && git purge && git clean -fdx
   cb = create-branch
   db = delete-branch
 [init]
