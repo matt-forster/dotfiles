@@ -16,4 +16,6 @@
   cb = create-branch
   db = delete-branch
 [init]
-	defaultBranch = main
+  defaultBranch = main
+[diff]
+  algorithm = patience
