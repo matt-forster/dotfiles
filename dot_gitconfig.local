@@ -19,3 +19,5 @@
   defaultBranch = main
 [diff]
   algorithm = patience
+[interactive]
+  diffFilter = "diff-so-fancy --patch"
