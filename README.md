@@ -1,5 +1,20 @@
 # Environment and Dotfiles
 
+
+## Notes from last clean install
+
+- https://github.com/rupor-github/win-gpg-agent was still the way to go, but make sure to restart after win works? Don't install random stuff or else it will make it harder
+- Order of operations:
+    - Set up windows GPG
+    - set up win-gpg-agent
+    - Install Go
+    - install gopass - alias to pass by symlink gopass -> pass
+    - install volta
+    - install asdf
+    - install antibody
+    - get dotfiles from q
+    - get local dotfiles using chezmoi
+
 ## Setup pass in a new environment
 
 1. Make sure GPG is set up + key is fetched
