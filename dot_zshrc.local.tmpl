@@ -47,10 +47,6 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 
 # Source
 
-{{- if eq .chezmoi.os "linux" }}
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-{{- end}}
-
 plugins=(git npm aws)
 autoload -U +X bashcompinit && bashcompinit
 bindkey "^[[3~" delete-char
