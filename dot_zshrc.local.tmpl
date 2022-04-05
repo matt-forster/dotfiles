@@ -56,6 +56,8 @@ source ~/.zsh_plugins.sh
 
 SPACESHIP_NODE_DEFAULT_VERSION=$(node --version)
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # eval $(thefuck --alias)
