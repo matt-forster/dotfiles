@@ -7,6 +7,7 @@
 - Order of operations:
     - Set up windows GPG
     - set up win-gpg-agent
+    - install socat on linux (restart machine, restart agent-gui, should be good to go after that)
     - Install Go
     - install gopass - alias to pass by symlink gopass -> pass
     - install volta
