@@ -5,16 +5,16 @@
 
 - https://github.com/rupor-github/win-gpg-agent was still the way to go, but make sure to restart after win works? Don't install random stuff or else it will make it harder
 - Order of operations:
-    - Set up windows GPG
-    - set up win-gpg-agent
-    - install socat on linux (restart machine, restart agent-gui, should be good to go after that)
-    - Install Go
-    - install gopass - alias to pass by symlink gopass -> pass
-    - install volta
-    - install asdf
-    - install antibody
-    - get dotfiles from q
-    - get local dotfiles using chezmoi
+    - [windows] Set up windows GPG
+    - [windows] set up win-gpg-agent
+    - [linux] install coreutils, build-essential, socat
+    - [linux] Install Go
+    - [linux] install gopass - alias to pass by symlink gopass -> pass
+    - [linux] install volta
+    - [linux] install asdf
+    - [linux] install antibody
+    - [linux] get dotfiles from q
+    - [linux] get local dotfiles using chezmoi
 
 ## Setup pass in a new environment
 
