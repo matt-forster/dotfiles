@@ -42,6 +42,7 @@ source "$(nix-env -q --out-path --json fzf | jq -r '. | to_entries[] | .value.ou
 
 # Variables
 
+export LANG='en_US.utf8'
 export VISUAL='nvim'
 export EDITOR="$VISUAL"
 export TZ_LIST='America/New_York,America/St_Johns,Etc/UTC'
