@@ -18,7 +18,7 @@ curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
 git clone https://github.com/so-fancy/diff-so-fancy.git ~/.local/share/diff-so-fancy
 ln -s ~/.local/share/diff-so-fancy/diff-so-fancy ~/.local/bin/diff-so-fancy
 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+/bin/bash -c "NONINTERACTIVE=1 $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 curl https://get.volta.sh | bash 
 volta install node
