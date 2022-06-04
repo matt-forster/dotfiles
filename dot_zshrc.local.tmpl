@@ -36,6 +36,7 @@ SPACESHIP_GIT_STATUS_SUFFIX=""
 SPACESHIP_GIT_STATUS_COLOR="068"
 SPACESHIP_AWS_PREFIX=""
 SPACESHIP_AWS_SUFFIX=" "
+SPACESHIP_NODE_DEFAULT_VERSION=$(node --version)
 
 # Path
 export PATH="$PATH:$HOME/.bin"
@@ -53,11 +54,7 @@ bindkey "^[[3~" delete-char
 source ~/.antidote/antidote.zsh
 source ~/.zsh_plugins.zsh
 source $HOME/.nix-profile/etc/profile.d/nix.sh
-source $HOME/.asdf/asdf.sh
-
-SPACESHIP_NODE_DEFAULT_VERSION=$(node --version)
-
-source ~/.fzf.zsh
+source "$(nix-env -q --out-path --json fzf | jq -r '."0".outputs.out')/share/fzf/key-bindings.zsh"
 
 # eval $(thefuck --alias)
 # export LESS='-XFR'
