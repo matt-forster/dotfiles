@@ -6,7 +6,7 @@ cd
 apt-get install coreutils build-essential curl git
 
 wget https://github.com/gopasspw/gopass/releases/download/v1.14.2/gopass_1.14.2_linux_amd64.deb
-sudo dpkg -i gopass_1.14.2_linux_amd64.deb
+dpkg -i gopass_1.14.2_linux_amd64.deb
 rm gopass_1.14.2_linux_amd64.deb
 
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage

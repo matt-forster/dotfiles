@@ -1,0 +1,15 @@
+# No arguments: `git status`
+# With arguments: acts like `git`
+
+g() {
+  local args=("$@")
+  if [[ ! $# -gt 0 ]]; then
+    args=("status")
+  fi
+
+  if [[ -x "$(command -v hub)" ]]; then
+    hub "${args[@]}"
+  else
+    git "${args[@]}"
+  fi
+}

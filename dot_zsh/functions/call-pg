@@ -1,0 +1,8 @@
+call-pg() 
+{
+    if type "pgcli" &> /dev/null; then
+        pgcli "$@"
+    else
+        psql "$@"
+    fi
+}
