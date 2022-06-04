@@ -1,10 +1,21 @@
 #! /bin/bash
 cd
 
-sudo apt-get install coreutils build-essential curl git autoload compctl
+sh <(curl -L https://nixos.org/nix/install)
+. ~/.nix-profile/etc/profile.d/nix.sh
+
+nix-env -iA nixpkgs.git
+nix-env -iA nixpkgs.zsh
+nix-env -iA nixpkgs.antibody
+nix-env -iA nixpkgs.stow
+nix-env -iA nixpkgs.fzf
+nix-env -iA nixpkgs.bat
+nix-env -iA nixpkgs.git-extras
+nix-env -iA nixpkgs.terraform
+nix-env -iA nixpkgs.vault
+nix-env -iA nixpkgs.packer
 
 sh -c "$(curl -fsLS chezmoi.io/get)" -- init matt-forster --apply
-sh <(curl -L https://nixos.org/nix/install)
 
 wget https://github.com/gopasspw/gopass/releases/download/v1.14.2/gopass_1.14.2_linux_amd64.deb ~
 sudo dpkg -i gopass_1.14.2_linux_amd64.deb
@@ -22,8 +33,5 @@ ln -s ~/.local/share/diff-so-fancy/diff-so-fancy ~/.local/bin/diff-so-fancy
 [ -f ~/.volta ] && curl https://get.volta.sh | bash 
 volta install node
 
-nix-env -iA nixpkgs.git-extras
-nix-env -iA nixpkgs.terraform
-nix-env -iA nixpkgs.vault
-nix-env -iA nixpkgs.packer
-
+# command -v zsh | sudo tee -a /etc/shells
+# chsh -s $(which zsh) $USER
