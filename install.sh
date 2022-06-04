@@ -4,6 +4,7 @@ cd
 sh <(curl -L https://nixos.org/nix/install)
 source ~/.nix-profile/etc/profile.d/nix.sh
 
+nix-env -iA nixpkgs.jq
 nix-env -iA nixpkgs.socat
 nix-env -iA nixpkgs.git
 nix-env -iA nixpkgs.zsh
