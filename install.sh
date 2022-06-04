@@ -26,3 +26,4 @@ volta install node
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
 asdf update
 
+brew install git-extras
