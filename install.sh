@@ -1,9 +1,10 @@
 #! /bin/bash
 cd
 
-sh -c "$(curl -fsLS chezmoi.io/get)" -- init matt-forster --apply
-
 apt-get install coreutils build-essential curl git autoload compctl
+
+sh -c "$(curl -fsLS chezmoi.io/get)" -- init matt-forster --apply
+sh <(curl -L https://nixos.org/nix/install)
 
 wget https://github.com/gopasspw/gopass/releases/download/v1.14.2/gopass_1.14.2_linux_amd64.deb ~
 sudo dpkg -i gopass_1.14.2_linux_amd64.deb
