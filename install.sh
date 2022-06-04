@@ -2,7 +2,7 @@
 cd
 
 sh <(curl -L https://nixos.org/nix/install)
-. ~/.nix-profile/etc/profile.d/nix.sh
+source ~/.nix-profile/etc/profile.d/nix.sh
 
 nix-env -iA nixpkgs.socat
 nix-env -iA nixpkgs.git
@@ -22,10 +22,13 @@ wget -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 git clone https://github.com/mattmc3/antidote.git ~/.antidote
 git clone https://github.com/so-fancy/diff-so-fancy.git ~/.local/share/diff-so-fancy
 
+source ~/.antidote/antidote.zsh
 sudo dpkg -i gopass_1.14.2_linux_amd64.deb
 chmod u+x nvim.appimage
 mv ./nvim.appimage .local/bin/nvim
 ln -s ~/.local/share/diff-so-fancy/diff-so-fancy ~/.local/bin/diff-so-fancy
+
+antidote bundle <~/.zsh_plugins.txt >~/.zsh_plugins.zsh
 
 curl https://get.volta.sh | bash 
 volta install node

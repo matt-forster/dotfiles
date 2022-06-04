@@ -51,7 +51,7 @@ autoload -U +X bashcompinit && bashcompinit
 bindkey "^[[3~" delete-char
 
 . ~/.antidote/antidote.zsh
-antidote load
+source ~/.zsh_plugins.zsh
 
 [ -f $HOME/.nix-profile/etc/profile.d/nix.sh ] && . $HOME/.nix-profile/etc/profile.d/nix.sh
 
