@@ -50,16 +50,14 @@ plugins=(git npm aws)
 autoload -U +X bashcompinit && bashcompinit
 bindkey "^[[3~" delete-char
 
-. ~/.antidote/antidote.zsh
+source ~/.antidote/antidote.zsh
 source ~/.zsh_plugins.zsh
-
-[ -f $HOME/.nix-profile/etc/profile.d/nix.sh ] && . $HOME/.nix-profile/etc/profile.d/nix.sh
-
+source $HOME/.nix-profile/etc/profile.d/nix.sh
 source $HOME/.asdf/asdf.sh
 
 SPACESHIP_NODE_DEFAULT_VERSION=$(node --version)
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source ~/.fzf.zsh
 
 # eval $(thefuck --alias)
 # export LESS='-XFR'
