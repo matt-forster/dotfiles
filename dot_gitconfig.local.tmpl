@@ -1,16 +1,19 @@
 [core]
+{{ if eq .chezmoi.group "matt" }}  
   pager = diff-so-fancy | less --tabs=4 -RFX
+{{ end }}
   editor = nvim
 [pretty]
   colored = format:%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset
 [user]
   name = Matt Forster
   email = hey@mattforster.ca
+{{ if eq .chezmoi.group "matt" }}  
   signingkey = 5DA07A957618798A 
+{{ end }}
 [commit]
   gpgsign = true
 [alias]
-  rel = log origin/release-candidate...origin/main --pretty=colored --reverse
   l =  log --pretty=colored --reverse -10
   sweep = !git sync && git purge && git clean -fdx
   cb = create-branch
@@ -19,5 +22,8 @@
   defaultBranch = main
 [diff]
   algorithm = patience
+
+{{ if eq .chezmoi.group "matt" }}  
 [interactive]
   diffFilter = "diff-so-fancy --patch"
+{{ end }}
