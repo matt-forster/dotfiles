@@ -21,23 +21,6 @@ export VAULT_ADDR_STAGING={{gopass "autovance/vault/url/staging" }}
 export NPM_TOKEN=$NPM_TOKEN
 {{ end }}
 
-# Variables
-export VISUAL='nvim'
-export EDITOR="$VISUAL"
-export TZ_LIST='America/New_York,America/St_Johns,Etc/UTC'
-
-export VOLTA_HOME=$HOME/.volta
-
-SPACESHIP_PACKAGE_SHOW=false
-SPACESHIP_DOCKER_SHOW=false
-SPACESHIP_VI_MODE_SHOW=false
-SPACESHIP_GIT_STATUS_PREFIX=" "
-SPACESHIP_GIT_STATUS_SUFFIX=""
-SPACESHIP_GIT_STATUS_COLOR="068"
-SPACESHIP_AWS_PREFIX=""
-SPACESHIP_AWS_SUFFIX=" "
-SPACESHIP_NODE_DEFAULT_VERSION=$(node --version)
-
 # Path
 export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME/.local/bin"
@@ -56,5 +39,22 @@ source ~/.zsh_plugins.zsh
 source $HOME/.nix-profile/etc/profile.d/nix.sh
 source "$(nix-env -q --out-path --json fzf | jq -r '."0".outputs.out')/share/fzf/key-bindings.zsh"
 
-# eval $(thefuck --alias)
-# export LESS='-XFR'
+# Variables
+
+export VISUAL='nvim'
+export EDITOR="$VISUAL"
+export TZ_LIST='America/New_York,America/St_Johns,Etc/UTC'
+
+export VOLTA_HOME=$HOME/.volta
+
+SPACESHIP_PACKAGE_SHOW=false
+SPACESHIP_DOCKER_SHOW=false
+SPACESHIP_VI_MODE_SHOW=false
+SPACESHIP_GIT_STATUS_PREFIX=" "
+SPACESHIP_GIT_STATUS_SUFFIX=""
+SPACESHIP_GIT_STATUS_COLOR="068"
+SPACESHIP_AWS_PREFIX=""
+SPACESHIP_AWS_SUFFIX=" "
+SPACESHIP_NODE_DEFAULT_VERSION=$(node --version)
+
+
