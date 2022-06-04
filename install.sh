@@ -1,7 +1,7 @@
 #! /usr/bin/env zsh
 cd
 
-sh -c "$(curl -fsLS chezmoi.io/get)" -- init matt-forster --apply
+sh -c "$(curl -fsLS chezmoi.io/get)" -- init matt-forster --apply --force
 sh <(curl -L https://nixos.org/nix/install)
 source ~/.nix-profile/etc/profile.d/nix.sh
 

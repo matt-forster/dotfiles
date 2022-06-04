@@ -1,4 +1,4 @@
-{{ if eq .chezmoi.group "matt" }}
+{{ if contains .chezmoi.kernel.osrelease "microsoft" }}
 # GPG Relay (Win only)
 
 ${HOME}/.ssh/win-gpg-agent-relay.sh start
