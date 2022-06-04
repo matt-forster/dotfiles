@@ -49,7 +49,8 @@ plugins=(git npm aws)
 autoload -U +X bashcompinit && bashcompinit
 bindkey "^[[3~" delete-char
 
-source ~/.zsh_plugins.sh
+antidote load
+
 . $HOME/.asdf/asdf.sh
 
 SPACESHIP_NODE_DEFAULT_VERSION=$(node --version)
