@@ -24,7 +24,7 @@ ln -s ~/.local/share/diff-so-fancy/diff-so-fancy ~/.local/bin/diff-so-fancy
 
 # Install 
 
-sh -c "$(curl -fsLS chezmoi.io/get)" -- init -v matt-forster --apply
+sh -c "$(curl -fsLS chezmoi.io/get)" -- init matt-forster --apply
 
 volta install node
 
