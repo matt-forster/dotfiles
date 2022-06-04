@@ -39,15 +39,6 @@ _load_settings() {
 }
 _load_settings "$HOME/.zsh/configs"
 
-export AUTOVANCE=$HOME/work
-export AUTOVANCE_CA=$AUTOVANCE/autovance.cacert.pem
-
-# Add autovance environment
-[[ -f $HOME/.ssh/config ]] && ln -fs $AUTOVANCE/dotfiles/ssh/config $HOME/.ssh/config
-[[ -f $AUTOVANCE/dotfiles/environments/.database.env ]] && source $AUTOVANCE/dotfiles/environments/.database.env
-[[ -f $AUTOVANCE/dotfiles/environments/.services.env ]] && source $AUTOVANCE/dotfiles/environments/.services.env
-[[ -f $AUTOVANCE/dotfiles/environments/.vault.env ]] && source $AUTOVANCE/dotfiles/environments/.vault.env
-
 # aliases
 [[ -f $HOME/.aliases ]] && source $HOME/.aliases
 
