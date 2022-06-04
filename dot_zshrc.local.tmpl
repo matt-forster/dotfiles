@@ -1,4 +1,4 @@
-{{- if eq .chezmoi.hostname "matt-desk" }}
+{{ if eq .chezmoi.hostname "matt-desk" }}
 # GPG Relay (Win only)
 
 ${HOME}/.ssh/win-gpg-agent-relay.sh start
@@ -7,25 +7,21 @@ card | ag --nocolor -o 'rsa4096/FD79F7B533DEACFB'
 
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 sudo /etc/init.d/dbus start &> /dev/null
-{{- end }}
+{{ end }}
 
 # Secrets
 
-export NPM_TOKEN={{ pass "autovance/npm/read" }}
-export PAPERTRAIL_API_TOKEN={{ pass "autovance/papertrail" }}
-export GITHUB_TOKEN={{ pass "github/token/cli" }}
-export SNYK_TOKEN={{ pass "autovance/snyk" }}
-export BW_SESSION={{ pass "bitwarden/session" }}
+{{ if eq .chezmoi.hostname "matt-desk" }}
+export NPM_TOKEN={{ gopass "autovance/npm/read" }}
+export GITHUB_TOKEN={{ gopass "github/token/cli" }}
+export BW_SESSION={{ gopass "bitwarden/session" }}
+export VAULT_ADDR_PRODUCTION={{gopass "autovance/vault/url/production" }}
+export VAULT_ADDR_STAGING={{gopass "autovance/vault/url/staging" }}
+{{ else if eq .chezmoi.group "codespace" }}
+export NPM_TOKEN=$NPM_TOKEN
+{{ end }}
 
 # Variables
-
-export VAULT_ADDR_PRODUCTION={{pass "autovance/vault/url/production" }}
-export VAULT_ADDR_STAGING={{pass "autovance/vault/url/staging" }}
-export VAULT_ADDR=$VAULT_ADDR_PRODUCTION
-export VAULT_CACERT=$AUTOVANCE/certificates/autovance.ca.cert.pem
-export AV_PUBLIC_KEY_PATH=/Users/matt/autovance/certificates/autovance.wild.cert.pem
-export AV_PRIVATE_KEY_PATH=/Users/matt/autovance/certificates/autovance.private.pem
-
 export VISUAL='nvim'
 export EDITOR="$VISUAL"
 export TZ_LIST='America/New_York,America/St_Johns,Etc/UTC'
