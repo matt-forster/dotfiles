@@ -1,8 +1,6 @@
 [core]
-{{ if eq .chezmoi.group "matt" }}  
   pager = diff-so-fancy | less --tabs=4 -RFX
   editor = nvim
-{{ end }}
 [pretty]
   colored = format:%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset
 [user]
@@ -22,8 +20,5 @@
   defaultBranch = main
 [diff]
   algorithm = patience
-
-{{ if eq .chezmoi.group "matt" }}  
 [interactive]
   diffFilter = "diff-so-fancy --patch"
-{{ end }}
