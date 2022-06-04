@@ -1,4 +1,4 @@
-{{ if eq .chezmoi.hostname "matt-desk" }}
+{{ if eq .chezmoi.group "matt" }}
 # GPG Relay (Win only)
 
 ${HOME}/.ssh/win-gpg-agent-relay.sh start
@@ -11,7 +11,7 @@ sudo /etc/init.d/dbus start &> /dev/null
 
 # Secrets
 
-{{ if eq .chezmoi.hostname "matt-desk" }}
+{{ if eq .chezmoi.group "matt" }}
 export NPM_TOKEN={{ gopass "autovance/npm/read" }}
 export GITHUB_TOKEN={{ gopass "github/token/cli" }}
 export BW_SESSION={{ gopass "bitwarden/session" }}
