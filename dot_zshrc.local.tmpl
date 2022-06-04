@@ -22,6 +22,7 @@ export NPM_TOKEN=$NPM_TOKEN
 {{ end }}
 
 # Path
+export VOLTA_HOME=$HOME/.volta
 export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/usr/local/go/bin"
@@ -44,8 +45,6 @@ source "$(nix-env -q --out-path --json fzf | jq -r '. | to_entries[] | .value.ou
 export VISUAL='nvim'
 export EDITOR="$VISUAL"
 export TZ_LIST='America/New_York,America/St_Johns,Etc/UTC'
-
-export VOLTA_HOME=$HOME/.volta
 
 SPACESHIP_PACKAGE_SHOW=false
 SPACESHIP_DOCKER_SHOW=false
