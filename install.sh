@@ -18,15 +18,11 @@ mv ./nvim.appimage .local/bin/nvim
 [[ -e ~/local/share/diff-so-fancy ]] || git clone https://github.com/so-fancy/diff-so-fancy.git ~/.local/share/diff-so-fancy
 ln -s ~/.local/share/diff-so-fancy/diff-so-fancy ~/.local/bin/diff-so-fancy
 
-[[ -e ~/.linuxbrew ]] || /bin/bash -c "NONINTERACTIVE=1 $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-eval "$(~/.linuxbrew/bin/brew shellenv)"
-
 [[ -e ~/.volta ]] || curl https://get.volta.sh | bash 
 volta install node
 
-brew install asdf
-brew install git-extras
-brew install the_silver_searcher
+[[ -e ~/.asdf ]] || git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
+ . $HOME/.asdf/asdf.sh
 
 asdf plugin add packer
 asdf plugin add terraform
