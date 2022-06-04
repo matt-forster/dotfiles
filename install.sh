@@ -1,7 +1,7 @@
 #! /bin/bash
 cd
 
-apt-get install coreutils build-essential curl git autoload compctl
+sudo apt-get install coreutils build-essential curl git autoload compctl
 
 sh -c "$(curl -fsLS chezmoi.io/get)" -- init matt-forster --apply
 sh <(curl -L https://nixos.org/nix/install)
