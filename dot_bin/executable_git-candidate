@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+git checkout "$(git default-branch)"
+git fetch origin
+git pull
+
+git checkout -B release-candidate
+git push -u

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+message=${@}
+cmd="git commit --amend"
+if [ ${#message} -ge 4 ]; then
+  cmd="${cmd} -m \"${message}\""
+else
+  cmd="${cmd} --no-edit"
+fi
+
+eval $cmd

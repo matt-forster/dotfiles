@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -e
+
+git checkout --quiet HEAD^
+git fetch origin "$(git default-branch)":"$(git default-branch)"
+git checkout --quiet - || git checkout --quiet -
