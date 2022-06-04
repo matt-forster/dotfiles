@@ -14,23 +14,16 @@ curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
 mv ./nvim.appimage .local/bin/nvim
 
-[[ -e ~/.antidote ]] || git clone https://github.com/mattmc3/antidote.git ~/.antidote
+[ -f ~/.antidote ] && git clone https://github.com/mattmc3/antidote.git ~/.antidote
 
-[[ -e ~/local/share/diff-so-fancy ]] || git clone https://github.com/so-fancy/diff-so-fancy.git ~/.local/share/diff-so-fancy
+[ -f ~/local/share/diff-so-fancy ] && git clone https://github.com/so-fancy/diff-so-fancy.git ~/.local/share/diff-so-fancy
 ln -s ~/.local/share/diff-so-fancy/diff-so-fancy ~/.local/bin/diff-so-fancy
 
-[[ -e ~/.volta ]] || curl https://get.volta.sh | bash 
+[ -f ~/.volta ] && curl https://get.volta.sh | bash 
 volta install node
 
-[[ -e ~/.asdf ]] || git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
- . $HOME/.asdf/asdf.sh
+nix-env -iA nixpkgs.git-extras
+nix-env -iA nixpkgs.terraform
+nix-env -iA nixpkgs.vault
+nix-env -iA nixpkgs.packer
 
-asdf plugin add packer
-asdf plugin add terraform
-asdf plugin add vault
-asdf install packer latest
-asdf install terraform latest
-asdf install vault latest
-asdf global packer latest
-asdf global terraform latest
-asdf global vault latest

@@ -52,9 +52,9 @@ bindkey "^[[3~" delete-char
 . ~/.antidote/antidote.zsh
 antidote load
 
-if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh
+[ -f $HOME/.nix-profile/etc/profile.d/nix.sh ] && source $HOME/.nix-profile/etc/profile.d/nix.sh
 
-. $HOME/.asdf/asdf.sh
+source $HOME/.asdf/asdf.sh
 
 SPACESHIP_NODE_DEFAULT_VERSION=$(node --version)
 
