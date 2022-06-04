@@ -37,7 +37,7 @@ bindkey "^[[3~" delete-char
 source ~/.antidote/antidote.zsh
 source ~/.zsh_plugins.zsh
 source $HOME/.nix-profile/etc/profile.d/nix.sh
-source "$(nix-env -q --out-path --json fzf | jq -r '."0".outputs.out')/share/fzf/key-bindings.zsh"
+source "$(nix-env -q --out-path --json fzf | jq -r '. | to_entries[] | .value.outputs.out')/share/fzf/key-bindings.zsh"
 
 # Variables
 
