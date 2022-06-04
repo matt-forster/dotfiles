@@ -1,0 +1,57 @@
+# load custom executable functions
+for function in $HOME/.zsh/functions/*; do
+  source $function
+done
+
+# extra files in $HOME/.zsh/configs/pre , $HOME/.zsh/configs , and ~/.zsh/configs/post
+# these are loaded first, second, and third, respectively.
+_load_settings() {
+  _dir="$1"
+  if [ -d "$_dir" ]; then
+    if [ -d "$_dir/pre" ]; then
+      for config in "$_dir"/pre/**/*(N-.); do
+        . $config
+      done
+    fi
+
+    for config in "$_dir"/**/*(N-.); do
+      case "$config" in
+        "$_dir"/pre/*)
+          :
+          ;;
+        "$_dir"/post/*)
+          :
+          ;;
+        *)
+          if [ -f $config ]; then
+            . $config
+          fi
+          ;;
+      esac
+    done
+
+    if [ -d "$_dir/post" ]; then
+      for config in "$_dir"/post/**/*(N-.); do
+        . $config
+      done
+    fi
+  fi
+}
+_load_settings "$HOME/.zsh/configs"
+
+export AUTOVANCE=$HOME/work
+export AUTOVANCE_CA=$AUTOVANCE/autovance.cacert.pem
+
+# Add autovance environment
+[[ -f $HOME/.ssh/config ]] && ln -fs $AUTOVANCE/dotfiles/ssh/config $HOME/.ssh/config
+[[ -f $AUTOVANCE/dotfiles/environments/.database.env ]] && source $AUTOVANCE/dotfiles/environments/.database.env
+[[ -f $AUTOVANCE/dotfiles/environments/.services.env ]] && source $AUTOVANCE/dotfiles/environments/.services.env
+[[ -f $AUTOVANCE/dotfiles/environments/.vault.env ]] && source $AUTOVANCE/dotfiles/environments/.vault.env
+
+# aliases
+[[ -f $HOME/.aliases ]] && source $HOME/.aliases
+
+# Local config
+[[ -f $HOME/.zshrc.local ]] && source $HOME/.zshrc.local
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
