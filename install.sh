@@ -23,8 +23,16 @@ ln -s ~/.local/share/diff-so-fancy/diff-so-fancy ~/.local/bin/diff-so-fancy
 [[ -e ~/.volta ]] || curl https://get.volta.sh | bash 
 volta install node
 
-[[ -e ~/.asdf ]] || git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
-asdf update
-
+brew install asdf
 brew install git-extras
 brew install the_silver_searcher
+
+asdf plugin add packer
+asdf plugin add terraform
+asdf plugin add vault
+asdf install packer latest
+asdf install terraform latest
+asdf install vault latest
+asdf global packer latest
+asdf global terraform latest
+asdf global vault latest
