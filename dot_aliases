@@ -1,5 +1,12 @@
 # Unix
-alias ll="ls -al"
+alias l='ls -lah'
+alias la='ls -lAh'
+alias ll='ls -lh'
+alias ls='ls --color=tty'
+alias lsa='ls -lah'
+alias md='mkdir -p'
+alias rd=rmdir
+alias ll="ls -lh"
 alias ln="ln -v"
 alias mkdir="mkdir -p"
 alias e="$EDITOR"

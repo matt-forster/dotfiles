@@ -19,6 +19,7 @@ mv ./nvim.appimage .local/bin/nvim
 ln -s ~/.local/share/diff-so-fancy/diff-so-fancy ~/.local/bin/diff-so-fancy
 
 [[ -e ~/.linuxbrew ]] || /bin/bash -c "NONINTERACTIVE=1 $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(~/.linuxbrew/bin/brew shellenv)"
 
 [[ -e ~/.volta ]] || curl https://get.volta.sh | bash 
 volta install node
