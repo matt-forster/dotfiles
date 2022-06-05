@@ -1,4 +1,4 @@
-{{ if contains .chezmoi.kernel.osrelease "microsoft" }}
+{{ if contains "microsoft" .chezmoi.kernel.osrelease }}
 # GPG Relay (Win only)
 
 ${HOME}/.ssh/win-gpg-agent-relay.sh start
