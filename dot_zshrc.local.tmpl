@@ -21,6 +21,9 @@ export VAULT_ADDR_STAGING={{gopass "autovance/vault/url/staging" }}
 export NPM_TOKEN=$NPM_TOKEN
 {{ end }}
 
+# autovance
+export VAULT_CAPATH=~/work/certificates
+
 # Path
 export VOLTA_HOME=$HOME/.volta
 export GOPATH="$HOME/.go"
