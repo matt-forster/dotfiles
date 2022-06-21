@@ -36,7 +36,6 @@ export PATH="$PATH:$VOLTA_HOME/bin"
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8   
 
-export LOCALE_ARCHIVE_2_27="$(nix-build --no-out-link "<nixpkgs>" -A glibcLocales)/lib/locale/locale-archive"
 
 # Source
 
@@ -48,6 +47,7 @@ source ~/.antidote/antidote.zsh
 source ~/.zsh_plugins.zsh
 source $HOME/.nix-profile/etc/profile.d/nix.sh
 source "$(nix-env -q --out-path --json fzf | jq -r '. | to_entries[] | .value.outputs.out')/share/fzf/key-bindings.zsh"
+export LOCALE_ARCHIVE_2_27="$(nix-build --no-out-link "<nixpkgs>" -A glibcLocales)/lib/locale/locale-archive"
 
 # Variables
 
