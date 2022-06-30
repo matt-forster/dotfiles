@@ -17,6 +17,9 @@ export GITHUB_TOKEN={{ gopass "github/token/cli" }}
 export BW_SESSION={{ gopass "bitwarden/session" }}
 export VAULT_ADDR_PRODUCTION={{gopass "autovance/vault/url/production" }}
 export VAULT_ADDR_STAGING={{gopass "autovance/vault/url/staging" }}
+
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+
 {{ else if eq .chezmoi.group "codespace" }}
 export NPM_TOKEN=$NPM_TOKEN
 {{ end }}
