@@ -21,5 +21,3 @@ alias clear-history='rm -f ~/.bash_history && rm -f $HISTFILE'
 alias list-ips="aws ec2 describe-instances --query 'sort_by(Reservations[].Instances[].{IP: PublicIpAddress, Name: Tags[?Key==\`Name\`].Value | [0]}, &Name)' --output=table"
 alias reset-card='gpg-agent-relay stop && gpg-agent-relay start'
 
-# docker
-
