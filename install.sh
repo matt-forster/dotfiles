@@ -31,14 +31,18 @@ nix-env -iA nixpkgs.deno
 nix-env -iA nixpkgs.curl
 nix-env -iA nixpkgs.awscli2
 nix-env -iA nixpkgs.gh
+nix-env -iA nixpkgs.silver-searcher
 
 git clone https://github.com/mattmc3/antidote.git ~/.antidote
 source ~/.antidote/antidote.zsh
 
-antidote bundle <~/.zsh_plugins.txt >~/.zsh_plugins.zsh
-
 curl https://get.volta.sh | bash 
 
 sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply git@github.com:matt-forster/dotfiles.git
+
+wget https://github.com/gopasspw/gopass/releases/download/v1.14.3/gopass_1.14.3_linux_amd64.deb
+sudo dpkg -i gopass_1.14.3_linux_amd64.deb
+
+antidote bundle <~/.zsh_plugins.txt >~/.zsh_plugins.zsh
 
 nix-collect-garbage
