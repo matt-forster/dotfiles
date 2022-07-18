@@ -32,6 +32,7 @@ nix-env -iA nixpkgs.curl
 nix-env -iA nixpkgs.awscli2
 nix-env -iA nixpkgs.gh
 nix-env -iA nixpkgs.silver-searcher
+nix-env -iA nixpkgs.go
 
 git clone https://github.com/mattmc3/antidote.git ~/.antidote
 source ~/.antidote/antidote.zsh
