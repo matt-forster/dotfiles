@@ -12,32 +12,12 @@ alias mkdir="mkdir -p"
 alias e="$EDITOR"
 alias v="$VISUAL"
 
-# autovance scripts
-alias autovance='cd $AUTOVANCE'
-alias av='autovance'
-alias r2='r2d2'
-
 #postgres scripts
 alias pg=call-pg
-alias pg-local='pg $MAIN_LOCAL'
-alias pg-staging='pg $(r2 creds -e staging --bare)'
-alias pg-staging-write='pg $(r2 creds -e staging -s write --bare)'
-alias pg-prod='pg $(r2 creds --bare)'
-
-# Requires Ruby
-alias copy-staging='copy_psql ${MAIN_PRODUCTION} ${MAIN_STAGING} -e $AUTOVANCE/operations/scripts/.expire_tables -v'
 
 #docker scripts
-alias av-servers='$AUTOVANCE/core/local-stack/run-servers.sh'
-alias av-run='$AUTOVANCE/core/local-stack/run.sh'
-alias av-update='$AUTOVANCE/core/local-stack/update.sh'
 alias av-stop='docker stop $(docker ps -f name=av -q)'
-alias av-list='docker ps -a --format "table {{.Names}}\t{{.Image}}\t{{.Status}}"'
-alias av-rm='docker rm $(docker ps -a -f name=av -q)'
-alias av-rmi='docker rmi -f $(docker images -a -q -f label="com.autovance.local"); docker rmi -f $(docker images -q 622734613471.dkr.ecr.ca-central-1.amazonaws.com/core); docker rmi -f $(docker images -q 622734613471.dkr.ecr.ca-central-1.amazonaws.com/database)'
-alias av-reset='av-stop; av-rm; av-rmi; av-run'
-alias docker-purge='av-stop; av-rm; av-rmi; docker rmi -f $(docker images -a -q)'
-alias docker-login='aws ecr get-login-password --region ca-central-1 | docker login --username AWS --password-stdin 622734613471.dkr.ecr.ca-central-1.amazonaws.com'
+alias docker-purge='docker rmi -f $(docker images -a -q)'
 
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
