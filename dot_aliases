@@ -22,7 +22,6 @@ alias docker-purge='docker rmi -f $(docker images -a -q)'
 alias path='echo $PATH | tr -s ":" "\n"'
 
 # command aliases
-
 alias projects='cd $HOME/projects'
 alias fire='dig +short txt istheinternetonfire.com'
 alias ip='curl https://ipinfo.io/ip'
