@@ -20,7 +20,7 @@
 ## Setup pass in a new environment
 
 1. Make sure GPG is set up + key is fetched
-2. gopass clone
+2. `gopass clone`
 
 # GPG Maintenance
 
