@@ -20,8 +20,7 @@
 ## Setup pass in a new environment
 
 1. Make sure GPG is set up + key is fetched
-2. `g clone <encrypted pass repo>  ~/.password-store`
-3. `pass init security@mattforster.ca`
+2. gopass clone
 
 # GPG Maintenance
 
