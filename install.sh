@@ -1,6 +1,11 @@
 #! /usr/bin/env zsh
 cd
 
+# BEFORE
+# sudo apt install zsh
+# command -v zsh | sudo tee -a /etc/shells
+# chsh -s $(which zsh) $USER
+
 sh -c "$(curl -fsLS chezmoi.io/get)" -- init matt-forster --apply --force
 sh <(curl -L https://nixos.org/nix/install)
 source ~/.nix-profile/etc/profile.d/nix.sh
@@ -38,5 +43,3 @@ curl https://get.volta.sh | bash
 sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply git@github.com:matt-forster/dotfiles.git
 
 nix-collect-garbage
-# command -v zsh | sudo tee -a /etc/shells
-# chsh -s $(which zsh) $USER
