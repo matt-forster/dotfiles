@@ -18,9 +18,6 @@ export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}
 {{ if eq .chezmoi.group "matt" }}
 export GITHUB_TOKEN={{ gopass "github/token/cli" }}
 export BW_SESSION={{ gopass "bitwarden/session" }}
-
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
-
 {{ else if eq .chezmoi.group "codespace" }}
 export NPM_TOKEN=$NPM_TOKEN
 {{ end }}
