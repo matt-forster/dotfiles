@@ -7,6 +7,7 @@
     - [windows/wsl] Set up windows GPG
     - [windows/wsl] set up win-gpg-agent
     - [linux] import ssh key from yubikey
+        - `curl -sSL https://key.mattforster.ca/gpg.pub | gpg --import -`
     - run install script after cloning dotfiles repo
 
 ## Setup pass in a new environment
