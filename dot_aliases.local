@@ -21,10 +21,5 @@ alias clear-history='rm -f ~/.bash_history && rm -f $HISTFILE'
 alias list-ips="aws ec2 describe-instances --query 'sort_by(Reservations[].Instances[].{IP: PublicIpAddress, Name: Tags[?Key==\`Name\`].Value | [0]}, &Name)' --output=table"
 alias reset-card='gpg-agent-relay stop && gpg-agent-relay start'
 
-alias av-restart="$AUTOVANCE/av-core/local-stack/restart.sh"
-
 # docker
 
-alias docker-login-west='eval $( aws ecr get-login --registry-ids 622734613471 --region us-west-2 --no-include-email )'
-alias docker-login-east='eval $( aws ecr get-login --registry-ids 622734613471 --region us-east-1 --no-include-email )'
-alias docker-login-central='eval $( aws ecr get-login --registry-ids 622734613471 --region ca-central-1 --no-include-email )'
