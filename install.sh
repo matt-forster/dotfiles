@@ -35,6 +35,8 @@ antidote bundle <~/.zsh_plugins.txt >~/.zsh_plugins.zsh
 
 curl https://get.volta.sh | bash 
 
+sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply git@github.com:matt-forster/dotfiles.git
+
 nix-collect-garbage
 # command -v zsh | sudo tee -a /etc/shells
 # chsh -s $(which zsh) $USER
