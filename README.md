@@ -1,6 +1,6 @@
 # Environment and Dotfiles
 
-## Notes from last clean install
+## Notes from last WSL clean install - have to auth and setup SSH first
 
 - https://github.com/rupor-github/win-gpg-agent was still the way to go, but make sure to restart after win works? Don't install random stuff or else it will make it harder
 - Order of operations:
