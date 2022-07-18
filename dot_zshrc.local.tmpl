@@ -14,7 +14,6 @@ export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}
 {{ end }}
 
 # Secrets
-
 {{ if eq .chezmoi.group "matt" }}
 export GITHUB_TOKEN={{ gopass "github/token/cli" }}
 export BW_SESSION={{ gopass "bitwarden/session" }}
@@ -30,11 +29,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$VOLTA_HOME/bin"
 
-export LC_CTYPE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8   
-
 # Source
-
 plugins=(git npm aws)
 autoload -U +X bashcompinit && bashcompinit
 bindkey "^[[3~" delete-char
@@ -43,7 +38,6 @@ source ~/.antidote/antidote.zsh
 source ~/.zsh_plugins.zsh
 
 # Variables
-
 export LANG='en_US.utf8'
 export VISUAL='nvim'
 export EDITOR="$VISUAL"
@@ -59,4 +53,6 @@ SPACESHIP_AWS_PREFIX=""
 SPACESHIP_AWS_SUFFIX=" "
 SPACESHIP_NODE_DEFAULT_VERSION=$(node --version)
 
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8   
 
