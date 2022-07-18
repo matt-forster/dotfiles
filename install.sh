@@ -6,7 +6,6 @@ cd
 # command -v zsh | sudo tee -a /etc/shells
 # chsh -s $(which zsh) $USER
 
-sh -c "$(curl -fsLS chezmoi.io/get)" -- init matt-forster --apply --force
 sh <(curl -L https://nixos.org/nix/install)
 source ~/.nix-profile/etc/profile.d/nix.sh
 
