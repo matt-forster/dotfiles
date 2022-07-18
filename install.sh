@@ -18,6 +18,15 @@ nix-env -iA nixpkgs.packer
 nix-env -iA nixpkgs.neovim
 nix-env -iA nixpkgs.gopass
 nix-env -iA nixpkgs.diff-so-fancy
+nix-env -iA nixpkgs.pgcli
+nix-env -iA nixpkgs.sampler
+nix-env -iA nixpkgs.stow
+nix-env -iA nixpkgs.tz
+nix-env -iA nixpkgs.git-revise
+nix-env -iA nixpkgs.deno
+nix-env -iA nixpkgs.curl
+nix-env -iA nixpkgs.awscli2
+nix-env -iA nixpkgs.gh
 
 git clone https://github.com/mattmc3/antidote.git ~/.antidote
 source ~/.antidote/antidote.zsh
