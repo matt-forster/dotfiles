@@ -6,9 +6,9 @@ alias ls='ls --color=tty'
 alias lsa='ls -lah'
 alias md='mkdir -p'
 alias rd=rmdir
-alias ll="ls -lh"
 alias ln="ln -v"
 alias mkdir="mkdir -p"
+
 alias e="$EDITOR"
 alias v="$VISUAL"
 
@@ -32,7 +32,7 @@ alias card='gpg --card-status'
 # shortcuts
 
 alias :wq='echo "Bye!" && logout'
-alias :q='echo "Bye! - History is removed!" && clear-history && logout'
+alias :q!='echo "Bye! - History is removed!" && clear-history && logout'
 
 alias git-branch='git log --graph --oneline --all'
 alias cdr='cd $(git rev-parse --show-toplevel)'
