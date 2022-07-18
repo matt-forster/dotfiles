@@ -16,21 +16,14 @@ export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}
 # Secrets
 
 {{ if eq .chezmoi.group "matt" }}
-export NPM_TOKEN={{ gopass "autovance/npm/read" }}
 export GITHUB_TOKEN={{ gopass "github/token/cli" }}
 export BW_SESSION={{ gopass "bitwarden/session" }}
-export VAULT_ADDR_PRODUCTION={{gopass "autovance/vault/url/production" }}
-export VAULT_ADDR_STAGING={{gopass "autovance/vault/url/staging" }}
 
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
 {{ else if eq .chezmoi.group "codespace" }}
 export NPM_TOKEN=$NPM_TOKEN
 {{ end }}
-
-# autovance
-export VAULT_CAPATH=~/work/certificates
-export MAIN_LOCAL=postgres://test:test@localhost/main
 
 # Path
 export VOLTA_HOME=$HOME/.volta
@@ -57,7 +50,7 @@ source ~/.zsh_plugins.zsh
 export LANG='en_US.utf8'
 export VISUAL='nvim'
 export EDITOR="$VISUAL"
-export TZ_LIST='America/New_York,America/St_Johns,Etc/UTC'
+export TZ_LIST='America/New_York,America,Etc/UTC'
 
 SPACESHIP_PACKAGE_SHOW=false
 SPACESHIP_DOCKER_SHOW=false
