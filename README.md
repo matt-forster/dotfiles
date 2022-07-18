@@ -10,7 +10,12 @@
         - `curl -sSL https://key.mattforster.ca/gpg.pub | gpg --import -`
     - [linux] create winhome symlink
         - `ln -s /mnt/c/Users/matt/ ~/winhome`
-    - run install script after cloning dotfiles repo
+    - [linux] run gpg agent script
+        - [win-gpg-agent-relay.sh](https://github.com/matt-forster/dotfiles/blob/main/private_dot_ssh/executable_win-gpg-agent-relay.sh)
+        - `export SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh`
+    - [linux] install zsh
+        - https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH
+    - [linux] run install script after cloning dotfiles repo
 
 ## Setup pass in a new environment
 
