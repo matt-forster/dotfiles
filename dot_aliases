@@ -41,7 +41,5 @@ alias pr="gh pr create -d -a matt-forster"
 alias clear-history='rm -f ~/.bash_history && rm -f $HISTFILE'
 alias reset-card='gpg-agent-relay stop && gpg-agent-relay start'
 
-alias ght="$(echo $GITHUB_TOKEN)"
-
 # Include custom aliases
 # [[ -f ~/.aliases.local ]] && source $HOME/.aliases.local
