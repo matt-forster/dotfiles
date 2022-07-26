@@ -28,7 +28,7 @@ alias ip='curl https://ipinfo.io/ip'
 alias dot='chezmoi'
 alias nv='nvim'
 alias card='gpg --card-status'
-
+alias pass=gopass
 # shortcuts
 
 alias :wq='echo "Bye!" && logout'
