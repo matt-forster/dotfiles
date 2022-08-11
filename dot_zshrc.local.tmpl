@@ -8,16 +8,16 @@ export LOCALE_ARCHIVE_2_27="$(nix-build --no-out-link "<nixpkgs>" -A glibcLocale
 
 ${HOME}/.ssh/win-gpg-agent-relay.sh start
 export SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh
-card | ag --nocolor -o 'rsa4096/FD79F7B533DEACFB' 
 
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 {{ end }}
 
+# Encryption Check
+card | ag --nocolor -o 'rsa4096/FD79F7B533DEACFB' 
+
 # Secrets
-{{ if eq .chezmoi.group "matt" }}
-export GITHUB_TOKEN={{ gopass "github/token/cli" }}
 export BW_SESSION={{ gopass "bitwarden/session" }}
-{{ end }}
+export GITHUB_TOKEN={{ gopass "github/token/cli" }}
 
 # Path
 export VOLTA_HOME=$HOME/.volta
