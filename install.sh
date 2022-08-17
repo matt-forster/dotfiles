@@ -6,8 +6,14 @@ cd
 # command -v zsh | sudo tee -a /etc/shells
 # chsh -s $(which zsh) $USER
 
-sh <(curl -L https://nixos.org/nix/install)
-source ~/.nix-profile/etc/profile.d/nix.sh
+# for vscode, because unix soapbox
+export NIXPKGS_ALLOW_UNFREE=1
+
+# May have to rerun if this is missing (as it doesn't get sourced the same everywhere)
+if ! type nix-env >/dev/null 2>&1; then
+  sh <(curl -L https://nixos.org/nix/install)
+  source ~/.nix-profile/etc/profile.d/nix.sh
+fi
 
 nix-env -iA nixpkgs.jq
 nix-env -iA nixpkgs.socat
@@ -22,6 +28,7 @@ nix-env -iA nixpkgs.packer
 nix-env -iA nixpkgs.neovim
 nix-env -iA nixpkgs.gopass
 nix-env -iA nixpkgs.diff-so-fancy
+nix-env -iA nixpkgs.postgresql
 nix-env -iA nixpkgs.pgcli
 nix-env -iA nixpkgs.sampler
 nix-env -iA nixpkgs.stow
@@ -33,16 +40,15 @@ nix-env -iA nixpkgs.awscli2
 nix-env -iA nixpkgs.gh
 nix-env -iA nixpkgs.silver-searcher
 nix-env -iA nixpkgs.go
+nix-env -iA nixpkgs.wget
+nix-env -iA nixpkgs.vscode
 
 git clone https://github.com/mattmc3/antidote.git ~/.antidote
 source ~/.antidote/antidote.zsh
 
-curl https://get.volta.sh | bash 
+curl https://get.volta.sh | bash
 
-sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply git@github.com:matt-forster/dotfiles.git
-
-wget https://github.com/gopasspw/gopass/releases/download/v1.14.3/gopass_1.14.3_linux_amd64.deb
-sudo dpkg -i gopass_1.14.3_linux_amd64.deb
+sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply https://github.com/matt-forster/dotfiles.git
 
 antidote bundle <~/.zsh_plugins.txt >~/.zsh_plugins.zsh
 
