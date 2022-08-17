@@ -6,6 +6,9 @@ export SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh
 export PG_LOCAL={{ gopass "vts/pg/local" }}
 export AWS_PROFILE=vts
 export CIRCLE_TOKEN={{ gopass "vts/circleci/token" }}
+export NODE_ENV='local'
+export APP_ENV='local'
+export DISABLE_KAFKA=true
 {{ end }}
 
 {{ if eq .chezmoi.os "darwin" }}
