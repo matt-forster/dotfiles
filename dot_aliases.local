@@ -1,2 +1,2 @@
 alias ci=circleci-cli
-alias pythin=python3
+alias python=python3
