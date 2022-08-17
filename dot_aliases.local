@@ -1,1 +1,1 @@
-alias circleci=circleci-cli
+alias ci=circleci-cli
