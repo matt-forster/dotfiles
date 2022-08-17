@@ -53,14 +53,10 @@ let g:ale_sign_error = '❌'
 let g:ale_sign_warning = '⚠️'
 let g:ale_fix_on_save = 1
 
-
-if (has("termguicolors"))
- set termguicolors
-endif
-
 syntax enable
-set cursorline
 set number
+set cursorline
+colorscheme nord
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
