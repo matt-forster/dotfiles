@@ -42,4 +42,4 @@ alias clear-history='rm -f ~/.bash_history && rm -f $HISTFILE'
 alias reset-card='gpg-agent-relay stop && gpg-agent-relay start'
 
 # Include custom aliases
-# [[ -f ~/.aliases.local ]] && source $HOME/.aliases.local
+[[ -f ~/.aliases.local ]] && source $HOME/.aliases.local
