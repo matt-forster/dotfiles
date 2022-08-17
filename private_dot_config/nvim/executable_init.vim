@@ -19,6 +19,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'w0rp/ale'
 Plug 'airblade/vim-gitgutter'
+Plug 'github/copilot.vim'
 
 call plug#end()
 
