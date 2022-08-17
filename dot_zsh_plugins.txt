@@ -11,5 +11,4 @@ zsh-users/zsh-history-substring-search
 
 # these should be at last!
 ohmyzsh/ohmyzsh path:plugins/aws
-denysdovhan/spaceship-prompt
 zdharma/fast-syntax-highlighting

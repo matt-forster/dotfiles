@@ -42,6 +42,7 @@ nix-env -iA nixpkgs.silver-searcher
 nix-env -iA nixpkgs.go
 nix-env -iA nixpkgs.wget
 nix-env -iA nixpkgs.vscode
+nix-env -iA nixpkgs.starship
 
 git clone https://github.com/mattmc3/antidote.git ~/.antidote
 source ~/.antidote/antidote.zsh
