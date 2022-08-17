@@ -2,7 +2,7 @@
 export SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh
 
 # Work
-{{ if contains .chezmoi.hostname "vts" }}
+{{ if contains "vts" .chezmoi.hostname }}
 export PG_LOCAL={{ gopass "pg/local" }}
 
 {{ end }}
