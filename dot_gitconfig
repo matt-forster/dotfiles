@@ -1,5 +1,7 @@
 [branch]
   autosetuprebase = always
+[pull]
+  rebase = true
 [push]
   default = current
 [color]
