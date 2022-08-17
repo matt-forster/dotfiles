@@ -5,6 +5,7 @@ export SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh
 {{ if contains "vts" .chezmoi.hostname }}
 export PG_LOCAL={{ gopass "vts/pg/local" }}
 export AWS_PROFILE=vts
+export CIRCLE_TOKEN={{ gopass "vts/circleci/token" }}
 {{ end }}
 
 {{ if eq .chezmoi.os "darwin" }}
