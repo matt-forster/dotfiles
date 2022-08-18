@@ -11,6 +11,9 @@ export APP_ENV='local'
 export DISABLE_KAFKA=true
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 {{ end }}
 
 {{ if eq .chezmoi.os "darwin" }}
