@@ -8,6 +8,7 @@ export AWS_PROFILE=vts
 export CIRCLE_TOKEN={{ gopass "vts/circleci/token" }}
 export NODE_ENV='local'
 export APP_ENV='local'
+export APP_URL="http://$(ipconfig getifaddr en0):5000"
 export DISABLE_KAFKA=true
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
