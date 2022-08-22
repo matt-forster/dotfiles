@@ -2,6 +2,7 @@
 
 get_code () {
   MFA_CODE=$(ykman oath accounts code -s aws-sts)
+  echo $MFA_CODE
 }
 
 set-keys () {
