@@ -1,7 +1,7 @@
 #!/bin/bash
 
 get_code () {
-  MFA_CODE=$(ykman oath accounts code -s aws-sts)
+  MFA_CODE=$(ykman oath accounts code -s vts-aws)
   echo $MFA_CODE
 }
 
