@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set-keys () {
+  aws configure set aws_access_key_id ${2} --profile=${1}
+  aws configure set aws_secret_access_key ${3} --profile=${1}
+  aws configure set aws_session_token ${4} --profile=${1}
+}
+
+main () {
+  if [ $# -lt 3 ]
+  then
+    echo "Example: ${1} username 123456"
+  fi
+
+  echo "${2}"
+  MFA_SERIAL_NUMBER=$(aws iam list-mfa-devices --user-name "${1}" --query 'MFADevices[].SerialNumber' --output text --profile "${1}")
+
+  echo $MFA_SERIAL_NUMBER
+
+  set-keys default $(aws sts get-session-token --duration-seconds 86400 --profile "${1}" --serial-number ${MFA_SERIAL_NUMBER} --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]' --output text --token-code ${2})
+}
+
+main $1 $2
