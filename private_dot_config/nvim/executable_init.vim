@@ -20,7 +20,7 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'w0rp/ale'
 Plug 'airblade/vim-gitgutter'
 Plug 'github/copilot.vim'
-Plug 'github/justinmk/vim-sneak'
+Plug 'justinmk/vim-sneak'
 
 call plug#end()
 
