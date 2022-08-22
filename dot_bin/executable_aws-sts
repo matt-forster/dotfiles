@@ -1,10 +1,5 @@
 #!/bin/bash
 
-get_code () {
-  MFA_CODE=$(ykman oath accounts code -s vts-aws)
-  echo $MFA_CODE
-}
-
 set-keys () {
   aws configure set aws_access_key_id ${2} --profile=${1}
   aws configure set aws_secret_access_key ${3} --profile=${1}
@@ -22,8 +17,8 @@ main () {
 
   echo $MFA_SERIAL_NUMBER
 
-  set-keys default $(aws sts get-session-token --duration-seconds 86400 --profile "${1}" --serial-number ${MFA_SERIAL_NUMBER} --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]' --output text --token-code ${2})
+  MFA_CODE=$(ykman oath accounts code -s $1)
+  set-keys default $(aws sts get-session-token --duration-seconds 86400 --profile "${1}" --serial-number ${MFA_SERIAL_NUMBER} --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]' --output text --token-code ${MFA_CODE})
 }
 
-get_code
 main $1 $2
