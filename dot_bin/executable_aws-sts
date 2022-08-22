@@ -1,5 +1,9 @@
 #!/bin/bash
 
+get_code () {
+  MFA_CODE=$(ykman oath accounts code -s aws-sts)
+}
+
 set-keys () {
   aws configure set aws_access_key_id ${2} --profile=${1}
   aws configure set aws_secret_access_key ${3} --profile=${1}
@@ -9,7 +13,7 @@ set-keys () {
 main () {
   if [ $# -lt 3 ]
   then
-    echo "Example: ${1} username 123456"
+    echo "Example: ${1} username"
   fi
 
   echo "${2}"
@@ -20,4 +24,5 @@ main () {
   set-keys default $(aws sts get-session-token --duration-seconds 86400 --profile "${1}" --serial-number ${MFA_SERIAL_NUMBER} --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]' --output text --token-code ${2})
 }
 
+get_code
 main $1 $2
