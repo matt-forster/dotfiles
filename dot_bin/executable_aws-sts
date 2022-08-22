@@ -7,7 +7,7 @@ set-keys () {
 }
 
 main () {
-  if [ $# -lt 2 ]
+  if [ $# -lt 1 ]
   then
     echo "Example: ${1} username"
   fi
