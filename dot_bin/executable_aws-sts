@@ -12,9 +12,8 @@ main () {
     echo "Example: ${1} username"
   fi
 
-  echo "${2}"
+  echo "Setting keys for ${1}..."
   MFA_SERIAL_NUMBER=$(aws iam list-mfa-devices --user-name "${1}" --query 'MFADevices[].SerialNumber' --output text --profile "${1}")
-
   echo $MFA_SERIAL_NUMBER
 
   MFA_CODE=$(ykman oath accounts code -s $1)
