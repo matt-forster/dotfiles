@@ -12,7 +12,7 @@ alias mkdir="mkdir -p"
 alias e="$EDITOR"
 alias v="$VISUAL"
 
-alias pr="gh pr create -D -a matt-forster"
+alias pr="gh pr create -d -a matt-forster"
 
 #postgres scripts
 alias pg=call-pg
