@@ -3,6 +3,7 @@ export SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh
 
 # Work
 {{ if contains "vts" .chezmoi.hostname }}
+
 export PG_LOCAL={{ gopass "vts/pg/local" }}
 export AWS_PROFILE=vts
 export CIRCLE_TOKEN={{ gopass "vts/circleci/token" }}
@@ -17,12 +18,15 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 export PATH="$PATH:$(go env GOPATH)/bin"
 eval "$(rbenv init - zsh)"
+
 {{ end }}
 
 {{ if eq .chezmoi.os "darwin" }}
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 {{ else if contains "microsoft" .chezmoi.kernel.osrelease }}
+
 ${HOME}/.ssh/win-gpg-agent-relay.sh start
 source $HOME/.nix-profile/etc/profile.d/nix.sh
 source "$(nix-env -q --out-path --json fzf | jq -r '. | to_entries[] | .value.outputs.out')/share/fzf/key-bindings.zsh"
@@ -41,7 +45,6 @@ export GITHUB_TOKEN={{ gopass "github/token/cli" }}
 
 # Path
 export VOLTA_HOME=$HOME/.volta
-export GOPATH="$HOME/.go"
 export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$VOLTA_HOME/bin"
