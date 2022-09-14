@@ -15,7 +15,7 @@ export CXX=/usr/bin/clang++
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
-
+export PATH="$PATH:$(go env GOPATH)/bin"
 eval "$(rbenv init - zsh)"
 {{ end }}
 
