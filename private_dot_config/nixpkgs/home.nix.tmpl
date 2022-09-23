@@ -88,10 +88,6 @@
       gpgSign = true;
     };
 
-    branch = {
-      autosetuprebase = "always";
-    };
-
     push = {
       default = "current";
     };
@@ -115,6 +111,7 @@
     diff = {
       tool = "diff-so-fancy";
       algorithm = "patience";
+      colorMoved = "dimmed-zebra";
     };
 
     interactive = {
