@@ -48,7 +48,11 @@
     gcc
     direnv
     kubectl
+    {{- if eq .chezmoi.os "darwin" }}
+    pinentry_mac
+    {{- end }}
 
+    {{- if contains "vts" .chezmoi.hostname }}
     # Added for work
     redis
     buf
@@ -57,11 +61,8 @@
     libxml2
     cairo
     rbenv
-
-    {{- if eq .chezmoi.os "Darwin" }}
-    xcodegen
-    pinentry_mac
     {{- end }}
+
   ];
 
   programs.zsh = {
