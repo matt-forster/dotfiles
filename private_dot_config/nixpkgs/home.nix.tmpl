@@ -5,17 +5,52 @@
   # paths it should manage.
   home.username = "{{ .chezmoi.username }}";
   home.homeDirectory = "{{ .chezmoi.homeDir }}";
-
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
   home.stateVersion = "22.05";
 
-  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  packages = with pkgs; [
+    awscli2
+    bat
+    curl
+    deno
+    diff-so-fancy
+    docker
+    docker-compose
+    docker-credential-gcr
+    docker-credential-helpers
+    fzf
+    gh
+    git
+    git-extras
+    git-revise
+    gnupg
+    go
+    gopass
+    jq
+    neovim
+    packer
+    pgcli
+    pinentry-mac
+    postgresql
+    sampler
+    silver-searcher
+    socat
+    starship
+    stow
+    terraform
+    tz
+    vault
+    vscode
+    wget
+    zsh
+  ];
+
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "GitHub";
+      italic-text = "always";
+    };
+  };
 }
