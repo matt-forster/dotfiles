@@ -6,7 +6,7 @@
   home.username = "{{ .chezmoi.username }}";
   home.homeDirectory = "{{ .chezmoi.homeDir }}";
   home.stateVersion = "22.05";
-
+  programs.zsh.enable = true;
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
