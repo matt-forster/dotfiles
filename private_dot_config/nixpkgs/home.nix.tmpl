@@ -54,6 +54,18 @@
     {{- end }}
   ];
 
+  programs.zsh = {
+    enable = true;
+    
+    initExtra = ''
+    	source $HOME/.zshrc.d/*.zsh
+    '';
+
+    envExtra = ''
+        source $HOME/.zshenv.d/*.zsh
+    '';
+  }
+
   programs.bat = {
     enable = true;
     config = {
