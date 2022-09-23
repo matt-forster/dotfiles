@@ -14,7 +14,6 @@
     bat
     curl
     deno
-    diff-so-fancy
     docker
     docker-compose
     docker-credential-gcr
@@ -66,11 +65,18 @@
 
   programs.git = {
     enable = true;
-    
+ 
+    color = "auto";
+
     user = {
-      signingKey = "5DA07A957618798A";
       name = "Matt Forster";
       email = "hey@mattforster.ca";
+    };
+
+    signing = {
+      enable = true;
+      key = "5DA07A957618798A";
+      signByDefault = true;
     };
 
     init = {
@@ -81,11 +87,10 @@
       editor = "nvim";
       excludesFile = "${config.home.homeDirectory}/.gitignore";
       autocrlf = "input";
-      pager = "diff-so-fancy | less --tabs=4 -RFX";
     };
-
-    commit = {
-      gpgSign = true;
+	
+    diff-so-fancy = {
+      enable = true;
     };
 
     push = {
@@ -143,5 +148,11 @@
       pick = "cherry-pick";
       aliases = "!git config --get-regexp ^alias\\. | colrm 1 6 | sed 's/[ ]/ = /' | sort";
     };
+
+    extraConfig = ''
+      [branch]
+	autosetuprebase = always
+    ''
+	
   };
 }
