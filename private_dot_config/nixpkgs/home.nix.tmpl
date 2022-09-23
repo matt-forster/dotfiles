@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  targets.genericLinux.enable = true;
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "{{ .chezmoi.username }}";
@@ -47,7 +49,16 @@
     cmake
     gcc
     direnv
-   
+
+    # Added for work
+    redis
+    buf
+    colima
+    cocoapods
+    libxml2
+    cairo
+    rbenv
+
     {{- if eq .chezmoi.os "Darwin" }}
     xcodegen
     pinentry_mac
