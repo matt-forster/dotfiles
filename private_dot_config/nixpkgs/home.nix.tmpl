@@ -31,7 +31,6 @@
     neovim
     packer
     pgcli
-    pinentry_mac
     postgresql
     sampler
     silver-searcher
@@ -44,6 +43,17 @@
     vscode
     wget
     zsh
+    circleci-cli
+    libclang
+    cmake
+    gcc
+    direnv
+    firefox
+   
+    {{- if .chezmoi.os == "Darwin" }}
+    xcodegen
+    pinentry_mac
+    {{- end }}
   ];
 
   programs.bat = {
@@ -52,5 +62,93 @@
       theme = "Nord";
       italic-text = "always";
     };
+  };
+
+  programs.git = {
+    enable = true;
+    
+    user = {
+      signingKey = "5DA07A957618798A";
+      name = "Matt Forster";
+      email = "hey@mattforster.ca";
+    };
+
+    init = {
+      defaultBranch = "main";
+    };
+
+    core = {
+      editor = "nvim";
+      excludesFile = "${config.home.homeDirectory}/.gitignore";
+      autocrlf = "input";
+      pager = "diff-so-fancy | less --tabs=4 -RFX";
+    };
+
+    commit = {
+      gpgSign = true;
+    };
+
+    branch = {
+      autosetuprebase = "always";
+    };
+
+    push = {
+      default = "current";
+    };
+
+    pull = {
+      rebase = true;
+    };
+
+    color = {
+      ui = auto;
+    };
+
+    merge = {
+      ff = "only";
+    }
+
+    fetch = {
+      prune = true;
+    };
+    
+    diff = {
+      tool = "diff-so-fancy";
+      algorithm = "patience";
+    };
+
+    interactive = {
+      diffFilter = "diff-so-fancy --patch";
+    };
+
+    rebase = {
+      autosquash = true;
+    };
+
+    pretty = {
+      format = "%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset";
+    };
+
+    filter = {
+      lfs = {
+	clean = "git-lfs clean -- %f";
+	smudge = "git-lfs smudge -- %f";
+	required = true;
+      };
+    };
+
+    aliases = {
+      cb = "create-branch"
+      db = "delete-branch"
+      aa = "add --all"
+      ap = "add --patch"
+      branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
+      ci = "commit --verbose"
+      co = "checkout"
+      pf = "push --force-with-lease"
+      l = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+      pick = "cherry-pick"
+      aliases = !git config --get-regexp ^alias\\. | colrm 1 6 | sed 's/[ ]/ = /' | sort
+    }
   };
 }
