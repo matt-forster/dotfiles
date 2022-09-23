@@ -1,13 +1,4 @@
-#! /usr/bin/env zsh
 cd
-
-# BEFORE
-# sudo apt install zsh
-# command -v zsh | sudo tee -a /etc/shells
-# chsh -s $(which zsh) $USER
-
-# for vscode, because unix soapbox
-export NIXPKGS_ALLOW_UNFREE=1
 
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
