@@ -50,7 +50,7 @@
     direnv
     firefox
    
-    {{- if .chezmoi.os == "Darwin" }}
+    {{- if eq .chezmoi.os "Darwin" }}
     xcodegen
     pinentry_mac
     {{- end }}
