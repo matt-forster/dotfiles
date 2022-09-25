@@ -16,14 +16,14 @@
   l = log --pretty=colored -25
   cp = cherry-pick
   aliases = !git config --get-regexp ^alias\\. | colrm 1 6 | sed 's/[ ]/ = /' | sort
-	feature = feature -a feat
-	feat = feature -a feat
+  feature = feature -a feat
+  feat = feature -a feat
   fix = bug -a fix
 [pretty]
   colored = format:%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset
 [core]
   excludesfile = ~/.gitignore
-	autocrlf = input
+  autocrlf = input
   editor = vim
 [merge]
   ff = only
@@ -34,6 +34,6 @@
 [include]
   path = ~/.gitconfig.local
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  required = true
