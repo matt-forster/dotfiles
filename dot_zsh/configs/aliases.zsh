@@ -32,10 +32,9 @@ alias fire='dig +short txt istheinternetonfire.com'
 alias ip='curl https://ipinfo.io/ip'
 alias dot='chezmoi'
 alias nv='nvim'
-alias card='gpg --card-status'
 alias pass=gopass
-# shortcuts
 
+# shortcuts
 alias :wq='echo "Bye!" && logout'
 alias ':q!'='echo "Bye! - History is removed!" && clear-history && logout'
 
@@ -44,6 +43,3 @@ alias cdr='cd $(git rev-parse --show-toplevel)'
 alias update-plugins='antidote bundle < $HOME/.zsh_plugins.txt > $HOME/.zsh_plugins.sh && source $HOME/.zsh_plugins.sh'
 alias clear-history='rm -f ~/.bash_history && rm -f $HISTFILE'
 alias reset-card='gpg-agent-relay stop && gpg-agent-relay start'
-
-# Include custom aliases
-[[ -f ~/.aliases.local ]] && source $HOME/.aliases.local
