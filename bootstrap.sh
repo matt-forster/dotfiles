@@ -1,7 +1,11 @@
-#1 /urs/bin/env zsh
+#!/usr/bin/env zsh
+
+set -euo pipefail
 
 # May have to rerun if this is missing (as it doesn't get sourced the same everywhere)
-if ! type nix-env >/dev/null 2>&1; then
+if ! command -v nix &>/dev/null; then
   sh <(curl -L https://nixos.org/nix/install)
-  source ~/.nix-profile/etc/profile.d/nix.sh
+  echo '✅ Relaunch shell to source env and continue'
+else
+  echo '✅ Nix already installed'
 fi

@@ -1,13 +1,16 @@
 { config, pkgs, ... }:
 
 {
+
+  imports = [ ./bat.nix ];
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "{{ .chezmoi.username }}";
   home.homeDirectory = "{{ .chezmoi.homeDir }}";
   home.stateVersion = "22.05";
   programs.home-manager.enable = true;
- 
+
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
     awscli2
@@ -67,7 +70,7 @@
 
   programs.zsh = {
     enable = true;
-    
+
     initExtra = ''
     	source $HOME/.zshrc.d/old_init.zsh
     	source $HOME/.zshrc.d/local_init.zsh
@@ -82,13 +85,5 @@
     enable = true;
 
     diff-so-fancy.enable = true;
-  };
-
-  programs.bat = {
-    enable = true;
-    config = {
-      theme = "Nord";
-      italic-text = "always";
-    };
   };
 }
