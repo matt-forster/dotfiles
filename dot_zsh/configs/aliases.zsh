@@ -40,6 +40,5 @@ alias ':q!'='echo "Bye! - History is removed!" && clear-history && logout'
 
 alias git-branch='git log --graph --oneline --all'
 alias cdr='cd $(git rev-parse --show-toplevel)'
-alias update-plugins='antidote bundle < $HOME/.zsh_plugins.txt > $HOME/.zsh_plugins.sh && source $HOME/.zsh_plugins.sh'
 alias clear-history='rm -f ~/.bash_history && rm -f $HISTFILE'
 alias reset-card='gpg-agent-relay stop && gpg-agent-relay start'
