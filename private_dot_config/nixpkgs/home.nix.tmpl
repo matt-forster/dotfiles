@@ -2,7 +2,11 @@
 
 {
 
-  imports = [ ./bat.nix ];
+  imports = [
+    ./bat.nix
+    ./git.nix
+    ./zsh.nix
+  ];
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -51,35 +55,17 @@
     gcc
     direnv
     kubectl
+
     {{- if eq .chezmoi.os "darwin" }}
     pinentry_mac
     {{- end }}
 
-    {{- if contains "vts" .chezmoi.hostname }}
     # Added for work
+    {{- if contains "vts" .chezmoi.hostname }}
     redis
     buf
     colima
     {{- end }}
 
   ];
-
-  programs.zsh = {
-    enable = true;
-
-    initExtra = ''
-    	source $HOME/.zshrc.d/old_init.zsh
-    	source $HOME/.zshrc.d/local_init.zsh
-    '';
-
-    envExtra = ''
-        source $HOME/.zshenv.d/old_env.zsh
-    '';
-  };
-
-  programs.git = {
-    enable = true;
-
-    diff-so-fancy.enable = true;
-  };
 }
