@@ -53,6 +53,7 @@
     kubectl
     {{- if eq .chezmoi.os "darwin" }}
     pinentry_mac
+    rectangle
     {{- end }}
 
     {{- if contains "vts" .chezmoi.hostname }}
@@ -60,10 +61,6 @@
     redis
     buf
     colima
-    cocoapods
-    libxml2
-    cairo
-    rbenv
     {{- end }}
 
   ];
