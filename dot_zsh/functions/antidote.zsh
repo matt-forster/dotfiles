@@ -3,7 +3,7 @@ fpath+=${0:A:h}/functions
 export MANPATH="$MANPATH:${0:A:h}/man"
 
 # setup the environment
-for _fn in ${0:A:h}/functions/*; do
+for _fn in $HOME/.antidote/functions/*; do
   (( $+functions[${_fn:t}] )) && unfunction ${_fn:t}
   autoload -Uz "${_fn}"
 done
