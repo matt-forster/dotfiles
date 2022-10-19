@@ -10,13 +10,15 @@
 - [Mac] Setup ssh-agent
 - [Windows] Setup win-gpg-agent
 
+1. Run bootstrap script (env agnostic)
 1. Run install script (env agnostic)
+1. [optional] install brew, if absolutely needed
 1. Probably a bunch of other steps, it never works quite right
 
 Useful commands;
 
-`home-manager switch`
-`brew bundle cleanup && brew bundle check || brew bundle install`
+- `home-manager switch`
+- `brew bundle cleanup && brew bundle check || brew bundle install`
 
 ## Setup pass in a new environment
 
