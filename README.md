@@ -13,6 +13,11 @@
 1. Run install script (env agnostic)
 1. Probably a bunch of other steps, it never works quite right
 
+Useful commands;
+
+`home-manager switch`
+`brew bundle cleanup && brew bundle check || brew bundle install`
+
 ## Setup pass in a new environment
 
 1. Make sure GPG is set up + key is fetched
