@@ -18,7 +18,6 @@
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
     awscli2
-    k9s
     bat
     curl
     deno
@@ -56,6 +55,9 @@
     gcc
     direnv
     kubectl
+    libssh
+    k9s
+    
 
     {{- if eq .chezmoi.os "darwin" }}
     pinentry_mac
