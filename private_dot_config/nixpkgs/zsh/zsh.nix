@@ -3,7 +3,6 @@
 {
   programs.zsh = {
     enable = true;
-    dotDir = ".config/zsh/";
 
     localVariables = {
       NODE_OPTIONS = "--openssl-legacy-provider";
