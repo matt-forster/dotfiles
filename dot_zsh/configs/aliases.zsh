@@ -37,6 +37,7 @@ alias pass=gopass
 # shortcuts
 alias :wq='echo "Bye!" && logout'
 alias ':q!'='echo "Bye! - History is removed!" && clear-history && logout'
+alias 2fa='ykman oath accounts code -s'
 
 alias git-branch='git log --graph --oneline --all'
 alias cdr='cd $(git rev-parse --show-toplevel)'
