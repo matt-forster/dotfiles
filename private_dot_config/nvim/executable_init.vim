@@ -73,5 +73,5 @@ nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
 " Fuzzy
-nnoremap <silent> <leader>f :FZF<cr>
-nnoremap <silent> <leader>F :FZF ~<cr>
+nnoremap <silent> <c-p> :FZF<cr>
+nnoremap <silent> <c-P> :FZF ~<cr>
