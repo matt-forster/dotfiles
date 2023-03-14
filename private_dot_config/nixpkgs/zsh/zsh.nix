@@ -5,7 +5,6 @@
     enable = true;
 
     localVariables = {
-      NODE_OPTIONS = "--openssl-legacy-provider";
     };
 
     initExtra = ''
