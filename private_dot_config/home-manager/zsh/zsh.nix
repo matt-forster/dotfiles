@@ -8,8 +8,8 @@
     };
 
     initExtra = ''
-    	source $HOME/.config/nixpkgs/zsh/init.zsh
-    	source $HOME/.config/nixpkgs/zsh/work.zsh
+    	source $HOME/.config/home-manager/zsh/init.zsh
+    	source $HOME/.config/home-manager/zsh/work.zsh
     '';
   };
 }
