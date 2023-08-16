@@ -26,7 +26,7 @@
 
     attributes = [ "* text=auto" "*.pem text eol=lf" ];
 
-    ignores = [ ];
+    ignores = [ ".vscode/" ];
 
     extraConfig = {
       branch.autosetuprebase = "always";
