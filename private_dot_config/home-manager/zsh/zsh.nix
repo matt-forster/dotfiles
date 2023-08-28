@@ -10,7 +10,7 @@
     envExtra = ''
       export CC=/usr/bin/clang
       export CXX=/usr/bin/clang++
-    ''
+    '';
 
     initExtra = ''
     	source $HOME/.config/home-manager/zsh/init.zsh
