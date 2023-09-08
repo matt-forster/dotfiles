@@ -2,7 +2,7 @@
 
 set -e
 
-git push origin "HEAD:refs/heads/$1"
+git push origin "HEAD:refs/heads/mf/$1"
 git fetch origin
 git branch --track "mf/$1" "origin/mf/$1"
 git branch --set-upstream-to="origin/mf/$1" "mf/$1"
