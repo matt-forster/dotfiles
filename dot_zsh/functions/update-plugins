@@ -1,4 +1,0 @@
-function update-plugins() {
-  antidote bundle < $HOME/.zsh/zsh_plugins.txt > $HOME/.zsh/zsh_plugins.sh
-  source $HOME/.zsh/zsh_plugins.sh
-}

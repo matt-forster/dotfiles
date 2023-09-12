@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+# kinda just run it until it works
+
 set -euo pipefail
 cd
 
@@ -18,14 +20,14 @@ nix-channel --update
 nix-shell '<home-manager>' -A install
 echo '⌛️ Home Manager installed'
 
-git clone https://github.com/mattmc3/antidote.git ~/.antidote
-source ~/.antidote/antidote.zsh
+sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply https://github.com/matt-forster/dotfiles.git
 
 curl https://get.volta.sh | bash
 
-sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply https://github.com/matt-forster/dotfiles.git
+git clone https://github.com/mattmc3/antidote.git ~/.antidote
+source ~/.antidote/antidote.zsh
 
-antidote bundle <~/.zsh_plugins.txt >~/.zsh_plugins.zsh
+antidote bundle ~/.zsh/zsh_plugins.txt > ~/.zsh/zsh_plugins.zsh
 
 nix-collect-garbage
 echo '✅ Done'
