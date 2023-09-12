@@ -9,6 +9,7 @@
 - Trust keys `gpg --edit-key [key-id]`
 - [Mac] Setup ssh-agent
 - [Windows] Setup win-gpg-agent
+- [Windows] https://github.com/demonbane/wsl-gpg-systemd
 
 1. Run bootstrap script (env agnostic)
 1. Run install script (env agnostic)
