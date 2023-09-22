@@ -5,6 +5,7 @@ caarlos0/zsh-open-github-pr
 mafredri/zsh-async
 rupa/z
 
+jscutlery/nx-completion
 zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-history-substring-search
