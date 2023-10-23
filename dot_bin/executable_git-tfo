@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+git add --all
+git stash 
+git create-branch "emergency"
+git stash pop
+git add --all
+git commit -m "wip: emergency commit" --no-verify
+git push
