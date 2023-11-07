@@ -13,7 +13,6 @@
       db = "delete-branch";
       aa = "add --all";
       ap = "add --patch";
-      ci = "commit -v";
       co = "checkout";
       pf = "push --force-with-lease";
       aliases = "!git config --get-regexp ^alias\\. | colrm 1 6 | sed 's/[ ]/ = /' | sort";
