@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+ticket=${@}
+cmd="git commit -v"
+if [ ${#ticket} -ge 4 ]; then
+  cmd="${cmd} --trailer \"Jira-ticket: ${ticket}\""
+else
+  cmd="${cmd} --trailer \"Jira-ticket: none\""
+fi
+
+eval $cmd
