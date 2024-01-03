@@ -13,7 +13,7 @@
   # paths it should manage.
   home.username = "{{ .chezmoi.username }}";
   home.homeDirectory = "{{ .chezmoi.homeDir }}";
-  home.stateVersion = "22.05";
+  home.stateVersion = "23.05";
   programs.home-manager.enable = true;
 
   nixpkgs.config.allowUnfree = true;
@@ -36,7 +36,7 @@
     git-extras
     git-revise
     gnupg
-    go_1_19
+    go
     gopass
     jq
     neovim
