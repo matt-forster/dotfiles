@@ -20,7 +20,7 @@
 
     signing = {
       signByDefault = true;
-      key = "D781788A!"; # can we eval this eventually?
+      key = "EDCF761DD781788A!"; # can we eval this eventually?
     };
 
     attributes = [ "* text=auto" "*.pem text eol=lf" ];
