@@ -45,5 +45,5 @@ alias clear-history='rm -f ~/.bash_history && rm -f $HISTFILE'
 alias reset-card='gpg-agent-relay stop && gpg-agent-relay start'
 
 alias issues='jira issue list -a$(jira me) --plain'
-alias cissues='jira issue list -a$(jira me) -s"in progress" --plain'
+alias cissues='jira issue list -a$(jira me) -s"started" --plain'
 
