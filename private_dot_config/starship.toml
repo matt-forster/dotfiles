@@ -36,4 +36,11 @@ symbol = ''
 truncation_length = 25
 
 [git_metrics]
-disabled = false 
+disabled = false
+
+[direnv]
+disabled = false
+symbol = ''
+allowed_msg = ''
+loaded_msg = '📂'
+format = '[$symbol$loaded $allowed]($style)' 
