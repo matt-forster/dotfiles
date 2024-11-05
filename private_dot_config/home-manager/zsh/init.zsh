@@ -3,6 +3,12 @@ for function in $HOME/.zsh/functions/*; do
   source $function
 done
 
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+# End Nix
+
 # extra files in $HOME/.zsh/configs/pre , $HOME/.zsh/configs , and ~/.zsh/configs/post
 # these are loaded first, second, and third, respectively.
 _load_settings() {
