@@ -13,8 +13,13 @@
     '';
 
     initExtra = ''
+        if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+          . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+        fi
+
     	source $HOME/.config/home-manager/zsh/init.zsh
       {{- if contains "vts" .chezmoi.hostname }}
+        source /etc/bashrc
     	source $HOME/.config/home-manager/zsh/work.zsh
       {{- end }}
     '';
