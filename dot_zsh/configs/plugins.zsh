@@ -5,6 +5,6 @@ bindkey "^[[3~" delete-char
 # source antidote
 source ~/.antidote/antidote.zsh
 
-export ZDOTDIR=~/.zshrc
+export ZDOTDIR=~/.zsh
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 antidote load
