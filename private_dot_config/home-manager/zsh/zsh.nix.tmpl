@@ -18,8 +18,9 @@
         fi
 
     	source $HOME/.config/home-manager/zsh/init.zsh
+
       {{- if contains "vts" .chezmoi.hostname }}
-        source /etc/bashrc
+      source /etc/bashrc
     	source $HOME/.config/home-manager/zsh/work.zsh
       {{- end }}
     '';
