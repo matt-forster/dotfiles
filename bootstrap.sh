@@ -4,7 +4,8 @@ set -euo pipefail
 
 # May have to rerun if this is missing (as it doesn't get sourced the same everywhere)
 if ! command -v nix &>/dev/null; then
-  sh <(curl -L https://nixos.org/nix/install)
+  curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | \
+  sh -s -- install
   echo '✅ Relaunch shell to source env and continue'
 else
   echo '✅ Nix already installed'
