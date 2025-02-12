@@ -21,6 +21,11 @@
       {{- if contains "vts" .chezmoi.hostname }}
     	source $HOME/.config/home-manager/zsh/work.zsh
       {{- end }}
+
+      {{- if contains "matt-desk" .chezmoi.hostname}}
+      eval "$(direnv hook zsh)"
+      {{- end}}
+
     '';
   };
 }
