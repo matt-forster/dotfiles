@@ -17,6 +17,8 @@
         fi
 
     	source $HOME/.config/home-manager/zsh/init.zsh
+      
+      eval "$(direnv hook zsh)"
 
       {{- if contains "vts" .chezmoi.hostname }}
     	source $HOME/.config/home-manager/zsh/work.zsh
