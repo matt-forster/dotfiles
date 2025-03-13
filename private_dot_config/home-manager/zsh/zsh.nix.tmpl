@@ -18,7 +18,7 @@
 
     	source $HOME/.config/home-manager/zsh/init.zsh
       
-      {{- if contains "lane" .chezmoi.hostname }}
+      {{- if contains "lane" .chezmoi.fqdnHostname }}
     	source $HOME/.config/home-manager/zsh/work.zsh
       {{- end }}
 
