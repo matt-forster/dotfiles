@@ -21,7 +21,11 @@
     settings = {
       user = {
         name = "Matt Forster";
+        {{- if contains "lane" .chezmoi.fqdnHostname }}
+        email = "matthew.forster@vts.com";
+        {{- else }}
         email = "hey@mattforster.ca";
+        {{- end }}
       };
 
       alias = {
