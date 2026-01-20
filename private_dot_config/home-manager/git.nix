@@ -20,7 +20,7 @@
 
     signing = {
       signByDefault = true;
-      key = "936B8E520EFA29EE!";
+      key = "8B5A4B24F610E234!";
     };
 
     attributes = [ "* text=auto" "*.pem text eol=lf" ];
