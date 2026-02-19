@@ -33,6 +33,15 @@
       bind -n M-k select-pane -U
       bind -n M-l select-pane -R
 
+      # macOS Option key sends Unicode chars, not Meta; bind those too
+      bind -n ˙ select-pane -L
+      bind -n ∆ select-pane -D
+      bind -n ˚ select-pane -U
+      bind -n ¬ select-pane -R
+
+      # Kill pane without confirmation
+      bind x kill-pane
+
       # Splits in current path
       bind | split-window -h -c "#{pane_current_path}"
       bind - split-window -v -c "#{pane_current_path}"
