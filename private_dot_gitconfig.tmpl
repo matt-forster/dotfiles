@@ -1,0 +1,76 @@
+[user]
+	name = Matt Forster
+{{- if contains "lane" .chezmoi.fqdnHostname }}
+	email = matthew.forster@vts.com
+{{- else }}
+	email = hey@mattforster.ca
+{{- end }}
+	signingkey = E2620E73258A426D
+
+[commit]
+	gpgsign = true
+
+[alias]
+	l  = log --pretty=colored --reverse -10
+	cb = create-branch
+	db = delete-branch
+	aa = add --all
+	ap = add --patch
+	co = checkout
+	pf = push --force-with-lease
+	aliases = !git config --get-regexp ^alias\\. | colrm 1 6 | sed 's/[ ]/ = /' | sort
+
+[branch]
+	autosetuprebase = always
+
+[pull]
+	rebase = true
+
+[push]
+	default = current
+
+[merge]
+	ff = only
+
+[fetch]
+	prune = true
+
+[rebase]
+	autoSquash = true
+
+[color]
+	ui = auto
+
+[core]
+	editor = nvim
+	autocrlf = input
+	pager = diff-so-fancy | less --tabs=4 -RFX
+	excludesfile = ~/.gitignore_global
+	attributesfile = ~/.gitattributes_global
+
+[interactive]
+	diffFilter = diff-so-fancy --patch
+
+[pretty]
+	colored = format:%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset
+
+[init]
+	defaultBranch = main
+
+[diff]
+	algorithm = patience
+
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse

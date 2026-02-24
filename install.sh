@@ -5,29 +5,24 @@
 set -euo pipefail
 cd
 
-if command -v nix &>/dev/null; then
-  : # ok, do nothing
-elif [[ -e /run/current-system/sw/bin/nix ]]; then
-  echo 'notice: nix install seems partly broken, working-around' >&2
-  export PATH=$PATH:/run/current-system/sw/bin
-else
-  fatal 'nix not present, is it installed?'
+if ! command -v brew &>/dev/null; then
+  echo 'fatal: brew not present, is it installed? Run bootstrap.sh first.' >&2
+  exit 1
 fi
 
-echo '⏳ Installing Home Manager'
-nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-nix-channel --update
-nix-shell '<home-manager>' -A install
-echo '⌛️ Home Manager installed'
-
+echo '⏳ Installing dotfiles with chezmoi'
 sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply https://github.com/matt-forster/dotfiles.git
 
+echo '⏳ Installing packages with Homebrew'
+brew bundle --file="$HOME/Brewfile"
+
+echo '⏳ Installing Volta'
 curl https://get.volta.sh | bash
 
+echo '⏳ Installing Antidote'
 git clone https://github.com/mattmc3/antidote.git ~/.antidote
 source ~/.antidote/antidote.zsh
 
 antidote bundle ~/.zsh/zsh_plugins.txt > ~/.zsh/zsh_plugins.zsh
 
-nix-collect-garbage
 echo '✅ Done'

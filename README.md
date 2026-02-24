@@ -1,25 +1,27 @@
 # Environment and Dotfiles
 
+Managed with [chezmoi](https://www.chezmoi.io/) and [Homebrew](https://brew.sh/).
+
 ## Steps
 
 1. Clone public dotfiles repo
 1. Install GPG and fetch keys
-  
+
 - `curl -sSL https://key.mattforster.ca/gpg.pub | gpg --import -`
 - Trust keys `gpg --edit-key [key-id]`
 - [Mac] Setup ssh-agent
 - [Windows] Setup win-gpg-agent
 - [Windows] https://github.com/demonbane/wsl-gpg-systemd
 
-1. Run bootstrap script (env agnostic)
-1. Run install script (env agnostic)
-1. [optional] install brew, if absolutely needed
+1. Run bootstrap script (installs Homebrew)
+1. Run install script (installs chezmoi, dotfiles, packages)
 1. Probably a bunch of other steps, it never works quite right
 
 Useful commands;
 
-- `home-manager switch`
-- `brew bundle cleanup && brew bundle check || brew bundle install`
+- `brew bundle check || brew bundle install`
+- `brew bundle cleanup`
+- `chezmoi apply`
 
 ## Setup pass in a new environment
 
