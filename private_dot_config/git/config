@@ -1,10 +1,6 @@
 [user]
 	name = Matt Forster
-{{- if contains "lane" .chezmoi.fqdnHostname }}
-	email = matthew.forster@vts.com
-{{- else }}
 	email = hey@mattforster.ca
-{{- end }}
 	signingkey = E2620E73258A426D
 
 [commit]
@@ -45,8 +41,6 @@
 	editor = nvim
 	autocrlf = input
 	pager = diff-so-fancy | less --tabs=4 -RFX
-	excludesfile = ~/.gitignore_global
-	attributesfile = ~/.gitattributes_global
 
 [interactive]
 	diffFilter = diff-so-fancy --patch
