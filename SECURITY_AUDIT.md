@@ -28,8 +28,7 @@ These are third-party or built-in Homebrew tap repositories enabled in the
 
 | Tap | Purpose |
 |-----|---------|
-| `homebrew/bundle` | Enables `brew bundle` (Brewfile support) |
-| `homebrew/services` | Enables `brew services` (service management) |
+| `buildkite/buildkite` | Buildkite CI/CD agent formula |
 
 ---
 
