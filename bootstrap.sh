@@ -2,15 +2,12 @@
 
 set -euo pipefail
 
-# Install Homebrew if not present
-# https://brew.sh
+# ── User Steps ──────────────────────────────────────────────────────
+# Run bootstrap-admin.sh first to install Homebrew.
 
 if ! command -v brew &>/dev/null; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo '✅ Homebrew installed — relaunch shell to source env, then re-run'
-  exit 0
-else
-  echo '✅ Homebrew already installed'
+  echo 'fatal: brew not present, is it installed? Run bootstrap-admin.sh first.' >&2
+  exit 1
 fi
 
 # Install gnupg early — needed before chezmoi can decrypt templates
