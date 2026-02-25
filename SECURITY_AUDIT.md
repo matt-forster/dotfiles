@@ -28,8 +28,7 @@ These are third-party or built-in Homebrew tap repositories enabled in the
 
 | Tap | Purpose |
 |-----|---------|
-| ~~`homebrew/bundle`~~ | _Removed — now built into Homebrew core_ |
-| ~~`homebrew/services`~~ | _Removed — now built into Homebrew core_ |
+| `buildkite/buildkite` | Buildkite CI/CD agent formula |
 
 ---
 
