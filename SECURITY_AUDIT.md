@@ -40,11 +40,12 @@ managed by Homebrew and update with `brew upgrade`.
 
 | Formula | Description | Homepage | Network Access |
 |---------|-------------|----------|----------------|
+| `actionlint` | Linter for GitHub Actions workflow files | https://github.com/rhysd/actionlint | No |
 | `awscli` | AWS command-line interface | https://aws.amazon.com/cli/ | Yes — AWS API |
 | `bat` | Cat clone with syntax highlighting and Git integration | https://github.com/sharkdp/bat | No |
 | `bottom` | Cross-platform graphical process/system monitor | https://github.com/ClementTsang/bottom | No |
+| `buildkite-agent` | Buildkite CI/CD agent and CLI | https://buildkite.com/docs/agent/v3 | Yes — Buildkite API |
 | `chezmoi` | Manage dotfiles across multiple machines | https://www.chezmoi.io/ | Yes — fetches dotfiles repo on init |
-| `circleci` | CircleCI command-line interface | https://circleci.com/docs/local-cli/ | Yes — CircleCI API |
 | `cmake` | Cross-platform build system generator | https://cmake.org/ | No |
 | `curl` | Command-line HTTP/HTTPS client | https://curl.se/ | Yes — user-directed |
 | `deno` | Secure JavaScript/TypeScript runtime | https://deno.land/ | Yes — module downloads |

@@ -8,7 +8,6 @@ alias md='mkdir -p'
 alias rd=rmdir
 alias ln="ln -v"
 alias mkdir="mkdir -p"
-alias ci="circleci-cli"
 alias python="python3"
 alias note="nv ~/note.md"
 

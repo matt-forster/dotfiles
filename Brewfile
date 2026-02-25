@@ -1,11 +1,12 @@
 tap "homebrew/bundle"
 tap "homebrew/services"
 
+brew "actionlint"
 brew "awscli"
 brew "bat"
 brew "bottom"
+brew "buildkite-agent"
 brew "chezmoi"
-brew "circleci"
 brew "cmake"
 brew "curl"
 brew "deno"
