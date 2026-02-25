@@ -30,6 +30,7 @@ brew "lcov"
 brew "libssh"
 brew "neovim"
 brew "packer"
+brew "pgcli"
 brew "pinentry-mac" if OS.mac?
 brew "postgresql"
 brew "ripgrep"

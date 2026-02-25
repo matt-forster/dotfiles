@@ -69,6 +69,7 @@ managed by Homebrew and update with `brew upgrade`.
 | `libssh` | SSH library (C implementation) | https://www.libssh.org/ | No (library, not a binary) |
 | `neovim` | Hyperextensible Vim-based text editor | https://neovim.io/ | No |
 | `packer` | Machine image build tool (HashiCorp) | https://www.packer.io/ | Yes — cloud provider APIs |
+| `pgcli` | Enhanced PostgreSQL CLI with auto-completion and syntax highlighting | https://www.pgcli.com/ | Yes — database connections |
 | `pinentry-mac` | macOS GUI for GPG passphrase entry *(macOS only)* | https://github.com/GPGTools/pinentry-mac | No |
 | `postgresql` | Relational database (client and server) | https://www.postgresql.org/ | Yes — database connections |
 | `ripgrep` | Fast recursive text search (`rg`) | https://github.com/BurntSushi/ripgrep | No |
@@ -176,10 +177,10 @@ Located in
 
 | Function | Description | External Tools Used |
 |----------|-------------|---------------------|
-| `call-pg` | Prefer `pgcli` over `psql` if available | `pgcli` (optional), `psql` |
+| `call-pg` | Prefer `pgcli` over `psql` if available | `pgcli`, `psql` |
 | `change-extension` | Bulk rename file extensions | `mv` |
 | `envup` | Export variables from a `.env` file | — |
-| `g` | Git wrapper; prefers `hub` if available | `git`, `hub` (optional) |
+| `g` | Git wrapper; runs `git status` with no args | `git` |
 | `mcd` | Create a directory and cd into it | — |
 
 ---
@@ -193,8 +194,7 @@ runtime.
 |------|-------------------|-------------|
 | `tmux` | `tmux.conf`, `dot_bin/tat` — full config present but not in Brewfile | Terminal multiplexer |
 | `rbenv` | `post/path.zsh` — loaded if present on `$PATH` | Ruby version manager |
-| `hub` | `functions/g` — used instead of `git` if present | GitHub CLI wrapper (legacy) |
-| `pgcli` | `functions/call-pg` — preferred over `psql` if present | Enhanced PostgreSQL CLI |
+| `pgcli` | `functions/call-pg` — preferred over `psql` if present | Enhanced PostgreSQL CLI (also installed via Brewfile) |
 | `ykman` | `dot_bin/aws-sts` — reads TOTP codes from YubiKey | YubiKey Manager CLI |
 | `ctags` | `dot_bin/git-ctags` — generates tags | Exuberant/Universal Ctags |
 | `gpg-agent-relay` | `aliases.zsh` `reset-card` alias | GPG agent relay for smart card reset |
