@@ -5,3 +5,5 @@ install.sh
 
 README.md
 _bw
+
+bin/chezmoi

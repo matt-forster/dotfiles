@@ -20,7 +20,11 @@ echo '⏳ Installing Volta'
 curl https://get.volta.sh | bash
 
 echo '⏳ Installing Antidote'
-git clone https://github.com/mattmc3/antidote.git ~/.antidote
+if [ -d ~/.antidote ]; then
+  git -C ~/.antidote pull
+else
+  git clone https://github.com/mattmc3/antidote.git ~/.antidote
+fi
 source ~/.antidote/antidote.zsh
 
 antidote bundle ~/.zsh/zsh_plugins.txt > ~/.zsh/zsh_plugins.zsh
