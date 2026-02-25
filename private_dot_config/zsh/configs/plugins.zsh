@@ -13,5 +13,5 @@ compinit -i
 source ~/.antidote/antidote.zsh
 
 export ZDOTDIR=~/.config/zsh
-# initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
-antidote load
+# initialize plugins statically with ${ZDOTDIR}/.zsh_plugins.txt
+antidote load ${ZDOTDIR}/.zsh_plugins.txt
