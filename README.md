@@ -5,8 +5,10 @@ Managed with [chezmoi](https://www.chezmoi.io/) and [Homebrew](https://brew.sh/)
 ## Steps
 
 1. Clone public dotfiles repo
-1. Run bootstrap script (installs Homebrew, GnuPG, imports GPG keys)
-1. Run install script (installs chezmoi, dotfiles, packages)
+1. Run `bootstrap-admin.sh` (elevated — installs Homebrew)
+1. Run `bootstrap.sh` (user — installs GnuPG, imports GPG keys)
+1. Run `install-admin.sh` (elevated — installs Homebrew packages)
+1. Run `install.sh` (user — installs chezmoi, dotfiles, Volta, Antidote)
 1. [Mac] Verify ssh-agent is configured
 1. [Windows] Setup win-gpg-agent / https://github.com/demonbane/wsl-gpg-systemd
 1. Probably a bunch of other steps, it never works quite right

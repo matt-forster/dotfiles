@@ -5,16 +5,16 @@
 set -euo pipefail
 cd
 
+# ── User Steps ──────────────────────────────────────────────────────
+# Run install-admin.sh first to install Homebrew packages.
+
 if ! command -v brew &>/dev/null; then
-  echo 'fatal: brew not present, is it installed? Run bootstrap.sh first.' >&2
+  echo 'fatal: brew not present, is it installed? Run bootstrap-admin.sh first.' >&2
   exit 1
 fi
 
 echo '⏳ Installing dotfiles with chezmoi'
 sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply https://github.com/matt-forster/dotfiles.git
-
-echo '⏳ Installing packages with Homebrew'
-brew bundle --file="$HOME/Brewfile"
 
 echo '⏳ Installing Volta'
 curl https://get.volta.sh | bash

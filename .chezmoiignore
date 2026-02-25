@@ -1,4 +1,6 @@
+bootstrap-admin.sh
 bootstrap.sh
+install-admin.sh
 install.sh
 
 README.md
