@@ -28,8 +28,8 @@ These are third-party or built-in Homebrew tap repositories enabled in the
 
 | Tap | Purpose |
 |-----|---------|
-| `homebrew/bundle` | Enables `brew bundle` (Brewfile support) |
-| `homebrew/services` | Enables `brew services` (service management) |
+| ~~`homebrew/bundle`~~ | _Removed — now built into Homebrew core_ |
+| ~~`homebrew/services`~~ | _Removed — now built into Homebrew core_ |
 
 ---
 
