@@ -27,6 +27,6 @@ else
 fi
 source ~/.antidote/antidote.zsh
 
-antidote bundle ~/.config/zsh/.zsh_plugins.txt > ~/.config/zsh/.zsh_plugins.zsh
+antidote bundle < ~/.config/zsh/.zsh_plugins.txt > ~/.config/zsh/.zsh_plugins.zsh
 
 echo '✅ Done'

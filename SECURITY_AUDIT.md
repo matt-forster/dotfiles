@@ -116,8 +116,6 @@ Defined in
 
 | Plugin | Repository | Description |
 |--------|------------|-------------|
-| `zsh-mkc` | https://github.com/caarlos0/zsh-mkc | `mkdir` + `cd` in one command |
-| `zsh-open-github-pr` | https://github.com/caarlos0/zsh-open-github-pr | Open GitHub PR from the command line |
 | `zsh-async` | https://github.com/mafredri/zsh-async | Async job support for Zsh |
 | `z` | https://github.com/rupa/z | Frecency-based directory jumper |
 | `nx-completion` | https://github.com/jscutlery/nx-completion | Zsh completions for Nx CLI |
@@ -125,7 +123,7 @@ Defined in
 | `zsh-autosuggestions` | https://github.com/zsh-users/zsh-autosuggestions | Fish-like autosuggestions for Zsh |
 | `zsh-history-substring-search` | https://github.com/zsh-users/zsh-history-substring-search | History search by substring |
 | `ohmyzsh/plugins/aws` | https://github.com/ohmyzsh/ohmyzsh | AWS CLI completions/helpers (from Oh My Zsh) |
-| `fast-syntax-highlighting` | https://github.com/zdharma/fast-syntax-highlighting | Syntax highlighting for Zsh commands |
+| `fast-syntax-highlighting` | https://github.com/zdharma-continuum/fast-syntax-highlighting | Syntax highlighting for Zsh commands |
 
 ### Built-in Zsh Plugin Keywords
 

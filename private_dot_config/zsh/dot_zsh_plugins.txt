@@ -1,7 +1,5 @@
 
 # this block is in alphabetic order
-caarlos0/zsh-mkc
-caarlos0/zsh-open-github-pr
 mafredri/zsh-async
 rupa/z
 
@@ -12,4 +10,4 @@ zsh-users/zsh-history-substring-search
 
 # these should be at last!
 ohmyzsh/ohmyzsh path:plugins/aws
-zdharma/fast-syntax-highlighting
+zdharma-continuum/fast-syntax-highlighting
