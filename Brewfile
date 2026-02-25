@@ -1,4 +1,5 @@
 tap "buildkite/buildkite"
+tap "dagger/tap"
 
 brew "actionlint"
 brew "awscli"
@@ -9,6 +10,7 @@ brew "buildkite/buildkite/buildkite-agent"
 brew "chezmoi"
 brew "cmake"
 brew "curl"
+brew "dagger/tap/dagger"
 brew "deno"
 brew "diff-so-fancy"
 brew "direnv"
