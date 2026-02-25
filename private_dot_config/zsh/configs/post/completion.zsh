@@ -1,5 +1,5 @@
 # load our own completion functions
-fpath=(~/.zsh/completion /usr/local/share/zsh/site-functions $fpath)
+fpath=(~/.config/zsh/completion /usr/local/share/zsh/site-functions $fpath)
 
 # completion
 autoload -U compinit
