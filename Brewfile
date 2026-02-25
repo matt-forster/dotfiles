@@ -1,5 +1,6 @@
 tap "homebrew/bundle"
 tap "homebrew/services"
+tap "buildkite/buildkite"
 
 brew "actionlint"
 brew "awscli"

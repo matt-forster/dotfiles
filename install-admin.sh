@@ -11,5 +11,7 @@ if ! command -v brew &>/dev/null; then
   exit 1
 fi
 
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
 echo '⏳ Installing packages with Homebrew'
-brew bundle --file="$HOME/Brewfile"
+brew bundle --file="$SCRIPT_DIR/Brewfile"
