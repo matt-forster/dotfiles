@@ -1,7 +1,7 @@
 [user]
 	name = Matt Forster
 	email = hey@mattforster.ca
-	signingkey = E2620E73258A426D
+	signingkey = 8B5A4B24F610E234
 
 [commit]
 	gpgsign = true
