@@ -45,3 +45,5 @@ brew "tz"
 brew "vault"
 brew "wget"
 brew "zsh"
+
+cask "font-monaspace"
