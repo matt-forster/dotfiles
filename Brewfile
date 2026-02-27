@@ -1,4 +1,6 @@
 tap "buildkite/buildkite"
+tap "dagger/tap"
+
 
 brew "actionlint"
 brew "awscli"
@@ -30,7 +32,6 @@ brew "lazygit"
 brew "lcov"
 brew "libssh"
 brew "neovim"
-brew "packer"
 brew "pgcli"
 brew "pinentry-mac" if OS.mac?
 brew "postgresql"
@@ -42,6 +43,5 @@ brew "terraform"
 brew "the_silver_searcher"
 brew "ttyd"
 brew "tz"
-brew "vault"
 brew "wget"
 brew "zsh"
