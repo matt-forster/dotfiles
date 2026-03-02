@@ -4,3 +4,5 @@ Host gh
 Host hassio
     User root
     HostName homeassistant.local
+    IdentityFile ~/.ssh/ha_yubikey
+    IdentitiesOnly yes
