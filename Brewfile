@@ -2,6 +2,8 @@ tap "buildkite/buildkite"
 tap "dagger/tap"
 
 
+brew "openssh"
+brew "libfido2"
 brew "actionlint"
 brew "awscli"
 brew "bat"
