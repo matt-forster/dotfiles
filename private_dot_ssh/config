@@ -1,7 +1,7 @@
 Host gh
     User git
     HostName github.com
-Host hassio
+Host ha
     User root
     HostName homeassistant.local
     IdentityFile ~/.ssh/ha_yubikey
