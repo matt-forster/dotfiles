@@ -15,7 +15,7 @@ alias e="$EDITOR"
 alias v="$VISUAL"
 
 alias pr="gh pr create -d -a matt-forster"
-alias mr="glab mr create -a matt.forster --fill --draft --signoff"
+alias mr="glab mr create -a matt.forster --fill --draft --signoff --yes"
 
 #postgres scripts
 alias pg=call-pg
