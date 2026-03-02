@@ -18,5 +18,6 @@ export PATH="$PATH:$ANDROID_SDK_ROOT/emulator"
 export PATH="$PATH:$ANDROID_SDK_ROOT/platform-tools"
 export PATH="$PATH:$(go env GOPATH)/bin"
 export PATH="$PATH:$VOLTA_HOME/bin"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 export -U PATH
