@@ -48,3 +48,5 @@ brew "warrensbox/tap/tfswitch"
 brew "tz"
 brew "wget"
 brew "zsh"
+
+cask "font-monaspace"
