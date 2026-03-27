@@ -30,6 +30,23 @@ format = '[($version )]($style)'
 [golang]
 format = '[($version )]($style)'
 
+[kubernetes]
+disabled = false
+format = '[$symbol$context( \($namespace\))]($style) '
+detect_folders = ['k8s', 'kube', 'overlays']
+detect_files = ['k9s.yaml']
+
+[kubernetes.context_aliases]
+"dev-cluster" = "DEV"
+
+[[kubernetes.contexts]]
+context_pattern = "dev.*"
+style = "bold red"
+
+[[kubernetes.contexts]]
+context_pattern = "local.*"
+style = "bold green"
+
 [git_branch]
 format = '[$symbol$branch(:$remote_branch)]($style) '
 symbol = ''
