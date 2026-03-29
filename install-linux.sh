@@ -153,6 +153,17 @@ if ! command -v aws &>/dev/null; then
   echo '✅ AWS CLI installed'
 fi
 
+# ── git-cliff ───────────────────────────────────────────────────────
+if ! command -v git-cliff &>/dev/null; then
+  echo '⏳ Installing git-cliff...'
+  VERSION=$(latest_release orhun/git-cliff)
+  curl -fsSL "https://github.com/orhun/git-cliff/releases/download/${VERSION}/git-cliff-${VERSION#v}-x86_64-unknown-linux-gnu.tar.gz" \
+    -o "$TMP/git-cliff.tar.gz"
+  tar -xzf "$TMP/git-cliff.tar.gz" -C "$TMP"
+  sudo install "$TMP/git-cliff-${VERSION#v}/git-cliff" "$BIN_DIR/git-cliff"
+  echo '✅ git-cliff installed'
+fi
+
 # ── actionlint ──────────────────────────────────────────────────────
 if ! command -v actionlint &>/dev/null; then
   echo '⏳ Installing actionlint...'
