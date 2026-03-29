@@ -57,9 +57,8 @@ fi
 # ── diff-so-fancy ───────────────────────────────────────────────────
 if ! command -v diff-so-fancy &>/dev/null; then
   echo '⏳ Installing diff-so-fancy...'
-  sudo curl -fsSL https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy \
-    -o "$BIN_DIR/diff-so-fancy"
-  sudo chmod +x "$BIN_DIR/diff-so-fancy"
+  sudo git clone --depth=1 https://github.com/so-fancy/diff-so-fancy.git /usr/local/lib/diff-so-fancy
+  sudo ln -sf /usr/local/lib/diff-so-fancy/diff-so-fancy "$BIN_DIR/diff-so-fancy"
   echo '✅ diff-so-fancy installed'
 fi
 
