@@ -29,8 +29,6 @@ if [ -d ~/.antidote ]; then
 else
   git clone https://github.com/mattmc3/antidote.git ~/.antidote
 fi
-source ~/.antidote/antidote.zsh
-
-antidote bundle < ~/.config/zsh/.zsh_plugins.txt > ~/.config/zsh/.zsh_plugins.zsh
+zsh -c 'source ~/.antidote/antidote.zsh && antidote bundle < ~/.config/zsh/.zsh_plugins.txt > ~/.config/zsh/.zsh_plugins.zsh'
 
 echo '✅ Done'
