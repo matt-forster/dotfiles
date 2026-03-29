@@ -1,6 +1,10 @@
-Host gh
+Host gh github.com
     User git
     HostName github.com
+{{- if eq .chezmoi.os "linux" }}
+    IdentityFile ~/.ssh/github_auth_ed25519
+    IdentitiesOnly yes
+{{- end }}
 Host ha
     User root
     HostName homeassistant.local
