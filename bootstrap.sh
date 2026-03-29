@@ -5,6 +5,11 @@ set -euo pipefail
 # ── User Steps ──────────────────────────────────────────────────────
 # Run bootstrap-admin.sh first.
 
+if [[ "${EUID:-$(id -u)}" -eq 0 ]]; then
+  echo 'fatal: do not run bootstrap.sh as root — GPG keys must be imported as your user.' >&2
+  exit 1
+fi
+
 OS="$(uname)"
 
 if [[ "$OS" == "Darwin" ]]; then

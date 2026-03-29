@@ -23,7 +23,6 @@ sudo apt-get install -y \
   bat \
   cmake \
   curl \
-  diff-so-fancy \
   direnv \
   ffmpeg \
   fzf \
@@ -53,6 +52,15 @@ sudo apt-get install -y \
 if command -v batcat &>/dev/null && ! command -v bat &>/dev/null; then
   mkdir -p "$HOME/.local/bin"
   ln -sf "$(command -v batcat)" "$HOME/.local/bin/bat"
+fi
+
+# ── diff-so-fancy ───────────────────────────────────────────────────
+if ! command -v diff-so-fancy &>/dev/null; then
+  echo '⏳ Installing diff-so-fancy...'
+  sudo curl -fsSL https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy \
+    -o "$BIN_DIR/diff-so-fancy"
+  sudo chmod +x "$BIN_DIR/diff-so-fancy"
+  echo '✅ diff-so-fancy installed'
 fi
 
 # ── GitHub CLI ──────────────────────────────────────────────────────
