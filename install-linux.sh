@@ -156,9 +156,9 @@ fi
 # ── actionlint ──────────────────────────────────────────────────────
 if ! command -v actionlint &>/dev/null; then
   echo '⏳ Installing actionlint...'
-  VERSION=$(latest_release rhysd/actionlint)
-  curl -fsSL "https://github.com/rhysd/actionlint/releases/download/${VERSION}/actionlint_${VERSION#v}_linux_amd64.tar.gz" \
-    | tar -C "$TMP" -xz actionlint
+  ASSET_URL=$(curl -fsSL "https://api.github.com/repos/rhysd/actionlint/releases/latest" \
+    | grep '"browser_download_url"' | grep 'linux_amd64\.tar\.gz' | cut -d'"' -f4 | head -1)
+  curl -fsSL "$ASSET_URL" | tar -C "$TMP" -xz actionlint
   sudo install "$TMP/actionlint" "$BIN_DIR/actionlint"
   echo '✅ actionlint installed'
 fi
