@@ -1,21 +1,30 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 set -euo pipefail
 
 # ── User Steps ──────────────────────────────────────────────────────
-# Run bootstrap-admin.sh first to install Homebrew.
+# Run bootstrap-admin.sh first.
 
-if ! command -v brew &>/dev/null; then
-  echo 'fatal: brew not present, is it installed? Run bootstrap-admin.sh first.' >&2
-  exit 1
-fi
+OS="$(uname)"
 
-# Install gnupg early — needed before chezmoi can decrypt templates
-brew install gnupg
-if [[ "$(uname)" == "Darwin" ]]; then
+if [[ "$OS" == "Darwin" ]]; then
+  if ! command -v brew &>/dev/null; then
+    echo 'fatal: brew not present, is it installed? Run bootstrap-admin.sh first.' >&2
+    exit 1
+  fi
+
+  # Install gnupg early — needed before chezmoi can decrypt templates
+  brew install gnupg
   brew install pinentry-mac
+  echo '✅ GnuPG installed'
+
+elif [[ "$OS" == "Linux" ]]; then
+  if ! command -v gpg &>/dev/null; then
+    echo 'fatal: gnupg not present. Run bootstrap-admin.sh first.' >&2
+    exit 1
+  fi
+  echo '✅ GnuPG already installed'
 fi
-echo '✅ GnuPG installed'
 
 # Import public key
 echo '⏳ Importing GPG public key'

@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 # kinda just run it until it works
 
@@ -6,11 +6,15 @@ set -euo pipefail
 cd
 
 # ── User Steps ──────────────────────────────────────────────────────
-# Run install-admin.sh first to install Homebrew packages.
+# Run install-admin.sh first to install packages.
 
-if ! command -v brew &>/dev/null; then
-  echo 'fatal: brew not present, is it installed? Run bootstrap-admin.sh first.' >&2
-  exit 1
+OS="$(uname)"
+
+if [[ "$OS" == "Darwin" ]]; then
+  if ! command -v brew &>/dev/null; then
+    echo 'fatal: brew not present, is it installed? Run bootstrap-admin.sh first.' >&2
+    exit 1
+  fi
 fi
 
 echo '⏳ Installing dotfiles with chezmoi'

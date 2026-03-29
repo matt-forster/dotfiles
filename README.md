@@ -1,22 +1,31 @@
 # Environment and Dotfiles
 
-Managed with [chezmoi](https://www.chezmoi.io/) and [Homebrew](https://brew.sh/).
+Managed with [chezmoi](https://www.chezmoi.io/).
 
 ## Steps
 
 1. Clone public dotfiles repo
-1. Run `bootstrap-admin.sh` (elevated — installs Homebrew)
-1. Run `bootstrap.sh` (user — installs GnuPG, imports GPG keys)
-1. Run `install-admin.sh` (elevated — installs Homebrew packages)
+1. Run `bootstrap-admin.sh` (elevated — installs Homebrew on macOS, apt prerequisites on Linux)
+1. Run `bootstrap.sh` (user — installs GnuPG if needed, imports GPG keys)
+1. Run `install-admin.sh` (elevated — runs `brew bundle` on macOS, `install-linux.sh` on Linux)
 1. Run `install.sh` (user — installs chezmoi, dotfiles, Volta, Antidote)
 1. [Mac] Verify ssh-agent is configured
 1. [Windows] Setup win-gpg-agent / https://github.com/demonbane/wsl-gpg-systemd
 1. Probably a bunch of other steps, it never works quite right
 
-Useful commands;
+### Work machines
 
-- `brew bundle check || brew bundle install`
-- `brew bundle cleanup`
+On work machines, add the following to `~/.config/chezmoi/chezmoi.toml` to enable Colima/Docker socket configuration:
+
+```toml
+[data]
+  isWork = true
+```
+
+Useful commands:
+
+- `brew bundle check || brew bundle install`  (macOS)
+- `brew bundle cleanup`                        (macOS)
 - `chezmoi apply`
 
 ## Setup pass in a new environment
@@ -53,4 +62,4 @@ key 1
 keytocard
 key 1
 # repeat for other keys
-```#
+```

@@ -42,12 +42,6 @@ bind -n M-j select-pane -D
 bind -n M-k select-pane -U
 bind -n M-l select-pane -R
 
-# macOS Option key sends Unicode chars, not Meta; bind those too
-bind -n ˙ select-pane -L
-bind -n ∆ select-pane -D
-bind -n ˚ select-pane -U
-bind -n ¬ select-pane -R
-
 # Kill pane without confirmation
 bind x kill-pane
 
@@ -58,7 +52,11 @@ bind c new-window -c "#{pane_current_path}"
 
 # Vi copy mode
 bind -T copy-mode-vi v send -X begin-selection
+{{- if eq .chezmoi.os "darwin" }}
 bind -T copy-mode-vi y send -X copy-pipe-and-cancel "pbcopy"
+{{- else if eq .chezmoi.os "linux" }}
+bind -T copy-mode-vi y send -X copy-pipe-and-cancel "xclip -selection clipboard"
+{{- end }}
 
 # -- Nord palette --
 set -g status-position top

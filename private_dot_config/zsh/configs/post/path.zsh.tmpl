@@ -10,7 +10,11 @@ fi
 PATH=".git/safe/../../bin:$PATH"
 
 export VOLTA_HOME=$HOME/.volta
+{{- if eq .chezmoi.os "darwin" }}
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+{{- else if eq .chezmoi.os "linux" }}
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+{{- end }}
 
 export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME/bin"
