@@ -57,7 +57,11 @@ fi
 # ── diff-so-fancy ───────────────────────────────────────────────────
 if ! command -v diff-so-fancy &>/dev/null; then
   echo '⏳ Installing diff-so-fancy...'
-  sudo git clone --depth=1 https://github.com/so-fancy/diff-so-fancy.git /usr/local/lib/diff-so-fancy
+  if [ -d /usr/local/lib/diff-so-fancy ]; then
+    sudo git -C /usr/local/lib/diff-so-fancy pull
+  else
+    sudo git clone --depth=1 https://github.com/so-fancy/diff-so-fancy.git /usr/local/lib/diff-so-fancy
+  fi
   sudo ln -sf /usr/local/lib/diff-so-fancy/diff-so-fancy "$BIN_DIR/diff-so-fancy"
   echo '✅ diff-so-fancy installed'
 fi
@@ -104,9 +108,9 @@ fi
 # ── bottom (btm) ────────────────────────────────────────────────────
 if ! command -v btm &>/dev/null; then
   echo '⏳ Installing bottom...'
-  VERSION=$(latest_release ClementTsang/bottom)
-  curl -fsSL "https://github.com/ClementTsang/bottom/releases/download/${VERSION}/bottom_${VERSION#v}_amd64.deb" \
-    -o "$TMP/bottom.deb"
+  ASSET_URL=$(curl -fsSL "https://api.github.com/repos/ClementTsang/bottom/releases/latest" \
+    | grep '"browser_download_url"' | grep 'amd64\.deb' | cut -d'"' -f4 | head -1)
+  curl -fsSL "$ASSET_URL" -o "$TMP/bottom.deb"
   sudo dpkg -i "$TMP/bottom.deb"
   echo '✅ bottom installed'
 fi

@@ -18,7 +18,11 @@ if [[ "$OS" == "Darwin" ]]; then
 fi
 
 echo '⏳ Installing dotfiles with chezmoi'
-sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply https://github.com/matt-forster/dotfiles.git
+if command -v chezmoi &>/dev/null && [ -d "$HOME/.local/share/chezmoi" ]; then
+  chezmoi apply
+else
+  sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply https://github.com/matt-forster/dotfiles.git
+fi
 
 echo '⏳ Installing Volta'
 curl https://get.volta.sh | bash
