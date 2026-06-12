@@ -1,6 +1,6 @@
 # Environment and Dotfiles
 
-Managed with [chezmoi](https://www.chezmoi.io/).
+Managed with [chezmoi](https://www.chezmoi.io/), host packages, and [mise](https://mise.jdx.dev/).
 
 ## Steps
 
@@ -14,6 +14,8 @@ Run as your user — sudo is called internally where needed. Re-run at any time;
 
 - `install-linux.sh` — re-run to update/install packages on Linux
 - `Brewfile` + `brew bundle` — manage packages on macOS
+- `mise install` — install/update mise-managed developer tools
+- `chezmoi apply` — apply dotfiles
 
 ### Work machines
 
@@ -23,23 +25,14 @@ Add to `~/.config/chezmoi/chezmoi.toml` to enable Colima/Docker socket configura
 [data]
   isWork = true
 ```
-1. [Windows] Setup win-gpg-agent / https://github.com/demonbane/wsl-gpg-systemd
-1. Probably a bunch of other steps, it never works quite right
 
-### Work machines
+## Tool Management
 
-On work machines, add the following to `~/.config/chezmoi/chezmoi.toml` to enable Colima/Docker socket configuration:
+Prefer mise for versioned developer tools, language runtimes, project tasks, and project-scoped environment variables. Homebrew and apt should stay focused on bootstrap and host packages. The global mise config pins current stable defaults for Go, Node, npm, Deno, Terraform, Codex, Nx, and agentmemory so they do not depend on Volta, asdf, or tfswitch being present.
 
-```toml
-[data]
-  isWork = true
-```
+Project `mise.toml` files should own project-specific tool pins. Use `[env]`, `_.path`, `_.file`, and `_.source` before adding new `.envrc` logic.
 
-Useful commands:
-
-- `brew bundle check || brew bundle install`  (macOS)
-- `brew bundle cleanup`                        (macOS)
-- `chezmoi apply`
+`direnv` remains installed as a legacy fallback, but zsh only hooks it when `mise` is not available. Do not use `direnv` to manage tool versions or language layouts; migrate those cases to mise. Avoid `use mise` in `.envrc`.
 
 ## Setup pass in a new environment
 

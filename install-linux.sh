@@ -54,6 +54,15 @@ if command -v batcat &>/dev/null && ! command -v bat &>/dev/null; then
   ln -sf "$(command -v batcat)" "$HOME/.local/bin/bat"
 fi
 
+# ── mise ────────────────────────────────────────────────────────────
+if ! command -v mise &>/dev/null; then
+  echo '⏳ Installing mise...'
+  mkdir -p "$HOME/.local/bin"
+  curl https://mise.run | MISE_INSTALL_PATH="$HOME/.local/bin/mise" sh
+  export PATH="$HOME/.local/bin:$PATH"
+  echo '✅ mise installed'
+fi
+
 # ── diff-so-fancy ───────────────────────────────────────────────────
 if ! command -v diff-so-fancy &>/dev/null; then
   echo '⏳ Installing diff-so-fancy...'
@@ -76,18 +85,6 @@ if ! command -v gh &>/dev/null; then
   sudo apt-get update -qq
   sudo apt-get install -y gh
   echo '✅ GitHub CLI installed'
-fi
-
-# ── Go ──────────────────────────────────────────────────────────────
-if ! command -v go &>/dev/null; then
-  echo '⏳ Installing Go...'
-  GO_VERSION=$(curl -fsSL "https://go.dev/VERSION?m=text" | head -1)
-  curl -fsSL "https://go.dev/dl/${GO_VERSION}.linux-amd64.tar.gz" | sudo tar -C /usr/local -xz
-  sudo tee /etc/profile.d/go.sh > /dev/null <<'EOF'
-export PATH=$PATH:/usr/local/go/bin
-EOF
-  export PATH="$PATH:/usr/local/go/bin"
-  echo '✅ Go installed'
 fi
 
 # ── Docker ──────────────────────────────────────────────────────────
@@ -174,27 +171,6 @@ if ! command -v actionlint &>/dev/null; then
   echo '✅ actionlint installed'
 fi
 
-# ── tfswitch ────────────────────────────────────────────────────────
-if ! command -v tfswitch &>/dev/null; then
-  echo '⏳ Installing tfswitch...'
-  curl -fsSL https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh | bash
-  echo '✅ tfswitch installed'
-fi
-
-# ── Deno ────────────────────────────────────────────────────────────
-if ! command -v deno &>/dev/null; then
-  echo '⏳ Installing Deno...'
-  curl -fsSL https://deno.land/install.sh | sh
-  echo '✅ Deno installed'
-fi
-
-# ── asdf ────────────────────────────────────────────────────────────
-if [ ! -d "$HOME/.asdf" ]; then
-  echo '⏳ Installing asdf...'
-  git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf"
-  echo '✅ asdf installed'
-fi
-
 # ── Buildkite agent ─────────────────────────────────────────────────
 if ! command -v buildkite-agent &>/dev/null; then
   echo '⏳ Installing Buildkite agent...'
@@ -212,4 +188,4 @@ echo '✅ Linux packages installed'
 echo ''
 echo 'Notes:'
 echo '  - Re-login or run: newgrp docker    (for Docker group membership)'
-echo '  - npm globals (bitwarden-cli, etc.) can be installed after Volta is set up'
+echo '  - Developer tool versions are managed by mise; run: mise install'

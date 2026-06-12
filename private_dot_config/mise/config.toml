@@ -1,0 +1,24 @@
+# Global mise defaults. Project mise.toml files override these.
+
+[tools]
+go = "1.26.4"
+node = "26.0.0"
+deno = "2.8.2"
+terraform = "1.15.6"
+"npm:@agentmemory/agentmemory" = "0.9.27"
+"npm:@openai/codex" = "0.139.0"
+"npm:npm" = "11.17.0"
+"npm:nx" = "22.7.5"
+
+[settings]
+# Shell startup should never install tools or wait on remote version lookups.
+auto_install = false
+exec_auto_install = false
+not_found_auto_install = false
+task.run_auto_install = false
+hook_env.cache_ttl = "5m"
+status.missing_tools = "never"
+
+# Let mise replace common single-purpose version managers when repos use
+# ecosystem-native files such as .nvmrc, .python-version, or .terraform-version.
+idiomatic_version_file_enable_tools = ["node", "python", "ruby", "terraform"]

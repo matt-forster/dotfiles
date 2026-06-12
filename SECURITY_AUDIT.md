@@ -4,8 +4,9 @@
 > dependency installed or referenced by this dotfiles repository. Intended for
 > security teams maintaining software/binary scanning exclusion lists.
 >
-> **Management stack:** [chezmoi](https://www.chezmoi.io/) (dotfile manager) +
-> [Homebrew](https://brew.sh/) (package manager) on macOS / Linux.
+> **Management stack:** [chezmoi](https://www.chezmoi.io/) (dotfile manager),
+> [Homebrew](https://brew.sh/) (host package manager), and
+> [mise](https://mise.jdx.dev/) (developer tool/runtime manager).
 
 ---
 
@@ -13,11 +14,12 @@
 
 1. [Homebrew Taps](#1-homebrew-taps)
 2. [Homebrew Formulae](#2-homebrew-formulae)
-3. [Externally Downloaded Tools](#3-externally-downloaded-tools)
-4. [Zsh Plugin Manager & Plugins](#4-zsh-plugin-manager--plugins)
-5. [Custom Shell Scripts](#5-custom-shell-scripts-bin)
-6. [Optional / Conditionally Loaded Tools](#6-optional--conditionally-loaded-tools)
-7. [External Services Contacted at Runtime](#7-external-services-contacted-at-runtime)
+3. [Mise-Managed Tools](#3-mise-managed-tools)
+4. [Externally Downloaded Tools](#4-externally-downloaded-tools)
+5. [Zsh Plugin Manager & Plugins](#5-zsh-plugin-manager--plugins)
+6. [Custom Shell Scripts](#6-custom-shell-scripts-bin)
+7. [Optional / Conditionally Loaded Tools](#7-optional--conditionally-loaded-tools)
+8. [External Services Contacted at Runtime](#8-external-services-contacted-at-runtime)
 
 ---
 
@@ -47,18 +49,17 @@ managed by Homebrew and update with `brew upgrade`.
 | `chezmoi` | Manage dotfiles across multiple machines | https://www.chezmoi.io/ | Yes — fetches dotfiles repo on init |
 | `cmake` | Cross-platform build system generator | https://cmake.org/ | No |
 | `curl` | Command-line HTTP/HTTPS client | https://curl.se/ | Yes — user-directed |
-| `deno` | Secure JavaScript/TypeScript runtime | https://deno.land/ | Yes — module downloads |
 | `diff-so-fancy` | Human-readable diff output for Git | https://github.com/so-fancy/diff-so-fancy | No |
-| `direnv` | Per-directory environment variable loader | https://direnv.net/ | No |
+| `direnv` | Legacy per-directory environment loader, used only when `mise` is unavailable | https://direnv.net/ | No |
 | `docker` | Container runtime (CLI component) | https://www.docker.com/ | Yes — Docker Hub / registries |
 | `docker-compose` | Multi-container Docker orchestration | https://docs.docker.com/compose/ | Yes — Docker Hub / registries |
 | `ffmpeg` | Multimedia framework (audio/video processing) | https://ffmpeg.org/ | No (unless streaming) |
 | `fzf` | General-purpose command-line fuzzy finder | https://github.com/junegunn/fzf | No |
 | `gh` | GitHub command-line interface | https://cli.github.com/ | Yes — GitHub API |
 | `git` | Distributed version control system | https://git-scm.com/ | Yes — remote repositories |
+| `git-cliff` | Changelog generator | https://git-cliff.org/ | No |
 | `git-extras` | Additional useful Git commands | https://github.com/tj/git-extras | No |
 | `gnupg` | GNU Privacy Guard — encryption and signing | https://gnupg.org/ | Yes — key servers |
-| `go` | Go programming language | https://go.dev/ | Yes — module proxy |
 | `gopass` | Password manager for teams (GPG-based) | https://github.com/gopasspw/gopass | Yes — Git-backed store sync |
 | `graphviz` | Graph visualization software (DOT language) | https://graphviz.org/ | No |
 | `jq` | Lightweight command-line JSON processor | https://jqlang.github.io/jq/ | No |
@@ -67,6 +68,7 @@ managed by Homebrew and update with `brew upgrade`.
 | `lazygit` | Terminal UI for Git | https://github.com/jesseduffield/lazygit | No |
 | `lcov` | Graphical front-end for GCC code coverage | https://github.com/linux-test-project/lcov | No |
 | `libssh` | SSH library (C implementation) | https://www.libssh.org/ | No (library, not a binary) |
+| `mise` | Developer tool, runtime, task, and environment manager | https://mise.jdx.dev/ | Yes — downloads configured tools |
 | `neovim` | Hyperextensible Vim-based text editor | https://neovim.io/ | No |
 | `packer` | Machine image build tool (HashiCorp) | https://www.packer.io/ | Yes — cloud provider APIs |
 | `pgcli` | Enhanced PostgreSQL CLI with auto-completion and syntax highlighting | https://www.pgcli.com/ | Yes — database connections |
@@ -76,7 +78,6 @@ managed by Homebrew and update with `brew upgrade`.
 | `socat` | Multipurpose socket relay | https://repo.or.cz/socat.git | Yes — arbitrary network connections |
 | `starship` | Minimal, fast, cross-shell prompt | https://starship.rs/ | No |
 | `stow` | Symlink farm manager | https://www.gnu.org/software/stow/ | No |
-| `terraform` | Infrastructure-as-code provisioning (HashiCorp) | https://www.terraform.io/ | Yes — cloud provider APIs, Terraform registries |
 | `the_silver_searcher` | Fast code search tool (`ag`) | https://github.com/ggreer/the_silver_searcher | No |
 | `ttyd` | Share terminal over the web via WebSocket | https://tsl0922.github.io/ttyd/ | Yes — exposes local terminal over HTTP |
 | `tz` | Time zone helper for the terminal | https://github.com/oz/tz | No |
@@ -86,7 +87,26 @@ managed by Homebrew and update with `brew upgrade`.
 
 ---
 
-## 3. Externally Downloaded Tools
+## 3. Mise-Managed Tools
+
+These tools are installed by `mise install` from
+[`private_dot_config/mise/config.toml`](private_dot_config/mise/config.toml).
+Project-level `mise.toml` files can override these global defaults.
+
+| Tool | Version | Description | Network Access |
+|------|---------|-------------|----------------|
+| `go` | `1.26.4` | Go programming language | Yes — Go module proxy |
+| `node` | `26.0.0` | JavaScript runtime | Yes — npm registry and application network calls |
+| `npm` | `11.17.0` | Node package manager | Yes — npm registry |
+| `deno` | `2.8.2` | JavaScript/TypeScript runtime | Yes — module downloads |
+| `terraform` | `1.15.6` | Infrastructure-as-code provisioning | Yes — cloud provider APIs, Terraform/OpenTofu registries |
+| `@openai/codex` | `0.139.0` | Codex CLI | Yes — OpenAI/API endpoints |
+| `nx` | `22.7.5` | Monorepo task runner | Yes — optional Nx Cloud and package registry access |
+| `@agentmemory/agentmemory` | `0.9.27` | Persistent agent memory tooling | Yes — local service plus configured model/API endpoints |
+
+---
+
+## 4. Externally Downloaded Tools
 
 These tools are fetched via `curl` or `git clone` during installation
 ([`bootstrap.sh`](bootstrap.sh), [`install.sh`](install.sh)).
@@ -95,13 +115,13 @@ These tools are fetched via `curl` or `git clone` during installation
 |------|---------------------|------------|-------------|
 | **Homebrew** | Curl → Bash pipe | `https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh` | macOS/Linux package manager |
 | **chezmoi** (init) | Curl → Shell pipe | `https://chezmoi.io/get` | Dotfile manager (bootstrap installer) |
-| **Volta** | Curl → Bash pipe | `https://get.volta.sh` | JavaScript tool/version manager (Node.js, npm, yarn) |
+| **mise** (Linux fallback) | Curl → Shell pipe | `https://mise.run` | Developer tool/runtime manager |
 | **Antidote** | `git clone` | `https://github.com/mattmc3/antidote.git` → `~/.antidote` | Zsh plugin manager |
 | **GPG public key** | `curl` → `gpg --import` | `https://key.mattforster.ca/gpg.pub` | Owner's GPG public key for commit signing / encryption |
 
 ---
 
-## 4. Zsh Plugin Manager & Plugins
+## 5. Zsh Plugin Manager & Plugins
 
 ### Plugin Manager
 
@@ -138,7 +158,7 @@ Loaded via the `plugins=()` array in
 
 ---
 
-## 5. Custom Shell Scripts (`~/.bin`)
+## 6. Custom Shell Scripts (`~/.bin`)
 
 Located in [`dot_bin/`](dot_bin/). These are plain shell scripts placed on
 `$PATH` — no external downloads, no compiled binaries.
@@ -183,7 +203,7 @@ Located in
 
 ---
 
-## 6. Optional / Conditionally Loaded Tools
+## 7. Optional / Conditionally Loaded Tools
 
 These tools are not installed by this repository but are expected or detected at
 runtime.
@@ -191,7 +211,6 @@ runtime.
 | Tool | Detection Context | Description |
 |------|-------------------|-------------|
 | `tmux` | `tmux.conf`, `dot_bin/tat` — full config present but not in Brewfile | Terminal multiplexer |
-| `rbenv` | `post/path.zsh` — loaded if present on `$PATH` | Ruby version manager |
 | `pgcli` | `functions/call-pg` — preferred over `psql` if present | Enhanced PostgreSQL CLI (also installed via Brewfile) |
 | `ykman` | `dot_bin/aws-sts` — reads TOTP codes from YubiKey | YubiKey Manager CLI |
 | `ctags` | `dot_bin/git-ctags` — generates tags | Exuberant/Universal Ctags |
@@ -201,7 +220,7 @@ runtime.
 
 ---
 
-## 7. External Services Contacted at Runtime
+## 8. External Services Contacted at Runtime
 
 These network endpoints are referenced in configuration or scripts.
 
@@ -209,10 +228,16 @@ These network endpoints are referenced in configuration or scripts.
 |----------|---------|---------|
 | `https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh` | `bootstrap.sh` | Homebrew installer |
 | `https://chezmoi.io/get` | `install.sh` | chezmoi bootstrap installer |
-| `https://get.volta.sh` | `install.sh` | Volta installer |
+| `https://mise.run` | `setup.sh`, `install.sh`, `install-linux.sh` | mise fallback installer |
 | `https://github.com/mattmc3/antidote.git` | `install.sh` | Antidote Zsh plugin manager |
 | `https://github.com/matt-forster/dotfiles.git` | `install.sh` | This dotfiles repository |
 | `https://key.mattforster.ca/gpg.pub` | `bootstrap.sh` | GPG public key import |
+| `https://mise-versions.jdx.dev` | `mise install` | mise version metadata |
+| `https://nodejs.org` | `mise install` | Node.js downloads and metadata |
+| `https://dl.google.com/go` | `mise install` | Go toolchain downloads |
+| `https://deno.com` | `mise install` | Deno downloads and metadata |
+| `https://api.github.com` | `mise install` | GitHub-backed tool metadata |
+| `https://registry.npmjs.org` | `mise install` | npm package downloads |
 | `https://ipinfo.io/ip` | Shell alias `ip` | Public IP lookup |
 | `istheinternetonfire.com` | Shell alias `fire` (DNS TXT query) | Internet status check |
 | `github.com` | SSH config, `gh`, `git` | GitHub access |

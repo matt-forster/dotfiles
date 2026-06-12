@@ -86,8 +86,15 @@ else
   sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply https://github.com/matt-forster/dotfiles.git
 fi
 
-echo '⏳ Installing Volta'
-curl https://get.volta.sh | bash
+if ! command -v mise &>/dev/null; then
+  echo '⏳ Installing mise'
+  mkdir -p "$HOME/.local/bin"
+  curl https://mise.run | MISE_INSTALL_PATH="$HOME/.local/bin/mise" sh
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+
+echo '⏳ Installing mise-managed tools'
+mise install
 
 echo '⏳ Installing Antidote'
 if [ -d ~/.antidote ]; then
@@ -103,5 +110,5 @@ if [[ "$OS" == "Linux" ]]; then
   echo ''
   echo 'Notes:'
   echo '  - Re-login or run: newgrp docker    (for Docker group membership)'
-  echo '  - npm globals (bitwarden-cli, etc.) can be installed after Volta is set up'
+  echo '  - Developer tool versions are managed by mise; run: mise install'
 fi
