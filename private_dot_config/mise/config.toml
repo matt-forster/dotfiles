@@ -10,6 +10,19 @@ terraform = "1.15.6"
 "npm:npm" = "11.17.0"
 "npm:nx" = "22.7.5"
 
+# Cross-platform CLI tools (installed via mise on all OS/distros)
+ripgrep = "latest"
+fzf = "latest"
+bat = "latest"
+neovim = "latest"
+direnv = "latest"
+starship = "latest"
+lazygit = "latest"
+k9s = "latest"
+"cargo:git-cliff" = "latest"
+actionlint = "latest"
+bottom = "latest"
+
 [settings]
 # Shell startup should never install tools or wait on remote version lookups.
 auto_install = false

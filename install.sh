@@ -19,9 +19,9 @@ fi
 
 echo '⏳ Installing dotfiles with chezmoi'
 if command -v chezmoi &>/dev/null && [ -d "$HOME/.local/share/chezmoi" ]; then
-  chezmoi apply
+  chezmoi apply --force
 else
-  sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply https://github.com/matt-forster/dotfiles.git
+  sh -c "$(curl -fsLS https://chezmoi.io/get)" -- init --apply --force https://github.com/matt-forster/dotfiles.git
 fi
 
 if ! command -v mise &>/dev/null; then
@@ -33,6 +33,18 @@ fi
 
 echo '⏳ Installing mise-managed tools'
 mise install
+
+# ── System packages (if running with sudo access) ───────────────────
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ "$OS" == "Linux" ]]; then
+  if command -v apt-get &>/dev/null; then
+    echo '⏳ Installing system packages (apt)'
+    bash "$SCRIPT_DIR/install-linux.sh"
+  elif command -v dnf &>/dev/null; then
+    echo '⏳ Installing system packages (dnf)'
+    bash "$SCRIPT_DIR/install-fedora.sh"
+  fi
+fi
 
 echo '⏳ Installing Antidote'
 if [ -d ~/.antidote ]; then

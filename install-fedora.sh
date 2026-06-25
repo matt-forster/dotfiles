@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-# ── Linux Package Installation ──────────────────────────────────────
-# Installs packages via apt and direct binary downloads.
+# ── Fedora / Amazon Linux (dnf) Package Installation ────────────────
+# Installs packages available in dnf repos and direct binary downloads.
 # Run with sudo / as a user with sudo privileges.
 
 BIN_DIR="/usr/local/bin"
@@ -14,31 +14,20 @@ latest_release() {
   curl -fsSL "https://api.github.com/repos/$1/releases/latest" | grep '"tag_name"' | cut -d'"' -f4
 }
 
-echo '⏳ Updating apt...'
-sudo apt-get update -qq
-
-# ── apt packages ────────────────────────────────────────────────────
-echo '⏳ Installing apt packages...'
-sudo apt-get install -y \
+echo '⏳ Installing dnf packages...'
+sudo dnf install -y \
   cmake \
   curl \
   git \
-  git-extras \
-  gnupg \
-  gopass \
+  gnupg2 \
   graphviz \
   jq \
   lcov \
-  libfido2-1 \
-  libssh-4 \
-  openssh-client \
-  pgcli \
-  pinentry-curses \
-  postgresql-client \
-  silversearcher-ag \
+  libatomic \
+  postgresql15 \
   socat \
-  stow \
   tmux \
+  util-linux-user \
   wget \
   zsh
 
@@ -66,12 +55,10 @@ fi
 # ── GitHub CLI ──────────────────────────────────────────────────────
 if ! command -v gh &>/dev/null; then
   echo '⏳ Installing GitHub CLI...'
-  curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
-    | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
-    | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-  sudo apt-get update -qq
-  sudo apt-get install -y gh
+  VERSION=$(latest_release cli/cli)
+  curl -fsSL "https://github.com/cli/cli/releases/download/${VERSION}/gh_${VERSION#v}_linux_amd64.tar.gz" \
+    | tar -C "$TMP" -xz --strip-components=1
+  sudo install "$TMP/bin/gh" "$BIN_DIR/gh"
   echo '✅ GitHub CLI installed'
 fi
 
@@ -83,20 +70,36 @@ if ! command -v docker &>/dev/null; then
   echo '✅ Docker installed (re-login required for group membership)'
 fi
 
+# ── kubectl ─────────────────────────────────────────────────────────
+if ! command -v kubectl &>/dev/null; then
+  echo '⏳ Installing kubectl...'
+  K8S_VERSION=$(curl -fsSL https://dl.k8s.io/release/stable.txt)
+  curl -fsSL "https://dl.k8s.io/release/${K8S_VERSION}/bin/linux/amd64/kubectl" -o "$TMP/kubectl"
+  sudo install -m 0755 "$TMP/kubectl" "$BIN_DIR/kubectl"
+  echo '✅ kubectl installed'
+fi
+
+# ── AWS CLI v2 ──────────────────────────────────────────────────────
+if ! command -v aws &>/dev/null; then
+  echo '⏳ Installing AWS CLI...'
+  curl -fsSL "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "$TMP/awscliv2.zip"
+  unzip -q "$TMP/awscliv2.zip" -d "$TMP"
+  sudo "$TMP/aws/install"
+  echo '✅ AWS CLI installed'
+fi
+
 # ── Buildkite agent ─────────────────────────────────────────────────
 if ! command -v buildkite-agent &>/dev/null; then
   echo '⏳ Installing Buildkite agent...'
-  curl -fsSL "https://keys.openpgp.org/vks/v1/by-fingerprint/32A37959C2FA5C3C99EFBC32A79206696452D198" \
-    | sudo gpg --dearmor -o /usr/share/keyrings/buildkite-agent-archive-keyring.gpg
-  echo "deb [signed-by=/usr/share/keyrings/buildkite-agent-archive-keyring.gpg] https://apt.buildkite.com/buildkite-agent stable main" \
-    | sudo tee /etc/apt/sources.list.d/buildkite-agent.list > /dev/null
-  sudo apt-get update -qq
-  sudo apt-get install -y buildkite-agent
+  VERSION=$(latest_release buildkite/agent)
+  curl -fsSL "https://github.com/buildkite/agent/releases/download/${VERSION}/buildkite-agent-linux-amd64-${VERSION#v}.tar.gz" \
+    | tar -C "$TMP" -xz
+  sudo install "$TMP/buildkite-agent" "$BIN_DIR/buildkite-agent"
   echo '✅ Buildkite agent installed'
 fi
 
 echo ''
-echo '✅ Linux packages installed'
+echo '✅ Fedora/AL2023 packages installed'
 echo ''
 echo 'Notes:'
 echo '  - Re-login or run: newgrp docker    (for Docker group membership)'
