@@ -19,8 +19,16 @@ if [[ "$OS" == "Darwin" ]]; then
   brew bundle --file="$SCRIPT_DIR/Brewfile"
 
 elif [[ "$OS" == "Linux" ]]; then
-  echo '⏳ Installing packages for Linux'
-  bash "$SCRIPT_DIR/install-linux.sh"
+  if command -v apt-get &>/dev/null; then
+    echo '⏳ Installing packages for Linux (apt)'
+    bash "$SCRIPT_DIR/install-linux.sh"
+  elif command -v dnf &>/dev/null; then
+    echo '⏳ Installing packages for Linux (dnf)'
+    bash "$SCRIPT_DIR/install-fedora.sh"
+  else
+    echo "No supported package manager (apt-get, dnf) found." >&2
+    exit 1
+  fi
 
 else
   echo "Unsupported OS: $OS" >&2

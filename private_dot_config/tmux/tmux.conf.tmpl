@@ -3,6 +3,11 @@ set -g prefix C-a
 unbind C-b
 bind C-a send-prefix
 
+# Shell
+{{- if lookPath "zsh" }}
+set -g default-command "zsh"
+{{- end }}
+
 # Terminal
 set -g default-terminal "tmux-256color"
 
@@ -23,6 +28,8 @@ setw -g mode-keys vi
 
 # Terminal true colour support
 set -ag terminal-overrides ",xterm-256color:RGB"
+# Allow OSC 52 to pass through to the outer terminal (clipboard over SSH)
+set -ag terminal-overrides ",xterm-256color:Ms=\\E]52;c;%p2%s\\7"
 
 set -g display-time 4000
 set -g status-interval 5
@@ -55,8 +62,11 @@ bind -T copy-mode-vi v send -X begin-selection
 {{- if eq .chezmoi.os "darwin" }}
 bind -T copy-mode-vi y send -X copy-pipe-and-cancel "pbcopy"
 {{- else if eq .chezmoi.os "linux" }}
-bind -T copy-mode-vi y send -X copy-pipe-and-cancel "xclip -selection clipboard"
+bind -T copy-mode-vi y send -X copy-pipe-and-cancel "if command -v xclip >/dev/null 2>&1 && [ -n \"$DISPLAY\" ]; then xclip -selection clipboard; else cat > /dev/null; fi"
 {{- end }}
+
+# Enable OSC 52 clipboard (works over SSH without X11)
+set -g set-clipboard on
 
 # -- Nord palette --
 set -g status-position top
