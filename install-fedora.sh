@@ -35,7 +35,7 @@ sudo dnf install -y \
 if ! command -v mise &>/dev/null; then
   echo '⏳ Installing mise...'
   mkdir -p "$HOME/.local/bin"
-  curl https://mise.run | MISE_INSTALL_PATH="$HOME/.local/bin/mise" sh
+  curl -fsSL https://mise.run | MISE_INSTALL_PATH="$HOME/.local/bin/mise" sh
   export PATH="$HOME/.local/bin:$PATH"
   echo '✅ mise installed'
 fi
