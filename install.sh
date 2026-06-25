@@ -52,6 +52,26 @@ if [ -d ~/.antidote ]; then
 else
   git clone https://github.com/mattmc3/antidote.git ~/.antidote
 fi
-zsh -c 'source ~/.antidote/antidote.zsh && antidote bundle < ~/.config/zsh/.zsh_plugins.txt > ~/.config/zsh/.zsh_plugins.zsh'
+if command -v zsh &>/dev/null; then
+  zsh -c 'source ~/.antidote/antidote.zsh && antidote bundle < ~/.config/zsh/.zsh_plugins.txt > ~/.config/zsh/.zsh_plugins.zsh'
+fi
+
+# ── Set default shell to zsh ────────────────────────────────────────
+if command -v zsh &>/dev/null; then
+  ZSH_PATH="$(command -v zsh)"
+  CURRENT_SHELL="$(getent passwd "$(whoami)" 2>/dev/null | cut -d: -f7 || true)"
+  if [ "$CURRENT_SHELL" != "$ZSH_PATH" ]; then
+    # Ensure zsh is in /etc/shells
+    if ! grep -qx "$ZSH_PATH" /etc/shells 2>/dev/null; then
+      echo "$ZSH_PATH" | sudo tee -a /etc/shells >/dev/null 2>&1 || true
+    fi
+    if command -v chsh &>/dev/null; then
+      echo "⏳ Changing default shell to zsh"
+      sudo chsh -s "$ZSH_PATH" "$(whoami)" 2>/dev/null \
+        || chsh -s "$ZSH_PATH" 2>/dev/null \
+        || true
+    fi
+  fi
+fi
 
 echo '✅ Done'
