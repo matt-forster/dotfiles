@@ -1,0 +1,147 @@
+# Kubernetes context helpers — mirror of aws.zsh
+#
+# Model:
+#   ~/.kube/config           = GLOBAL default (no KUBECONFIG set in the shell).
+#                              Manage with `kubeglobal <ctx>`.
+#   ~/.kube/configs/<n>.yaml = PER-CLUSTER kubeconfig, one file per remote cluster.
+#                              Activate per-shell with `kubeuse <n>`.
+#
+# k9s and kubectl both honor $KUBECONFIG, so per-shell switching just works.
+
+KUBE_CONFIGS_DIR="${KUBE_CONFIGS_DIR:-$HOME/.kube/configs}"
+
+kubep () {
+	local export_kubeconfig=true
+	local cluster=""
+	local region=""
+	local profile="${AWS_PROFILE:-}"
+	local args=()
+	for arg in "$@"; do
+		case "$arg" in
+			(--no-export) export_kubeconfig=false ;;
+			(--cluster=*) cluster="${arg#--cluster=}" ;;
+			(--cluster)   shift_next=cluster ;;
+			(--region=*)  region="${arg#--region=}" ;;
+			(--region)    shift_next=region ;;
+			(--profile=*) profile="${arg#--profile=}" ;;
+			(--profile)   shift_next=profile ;;
+			(-h|--help) cat <<'EOF'
+usage: kubep <name> [--cluster <eks-name>] [--region <r>] [--profile <p>] [--no-export]
+
+  Imports an EKS cluster into ~/.kube/configs/<name>.yaml using
+  `aws eks update-kubeconfig`. By default also exports
+  KUBECONFIG=~/.kube/configs/<name>.yaml for the current shell
+  (per-shell override of the global ~/.kube/config).
+
+  --cluster   EKS cluster name (default: <name>)
+  --region    AWS region       (default: from AWS profile / env)
+  --profile   AWS profile      (default: $AWS_PROFILE)
+  --no-export skip the export; use `kubeuse <name>` later to activate
+EOF
+				return 0 ;;
+			(*)
+				if [[ -n "${shift_next:-}" ]]; then
+					eval "$shift_next=\"$arg\""
+					shift_next=""
+				else
+					args+=("$arg")
+				fi
+				;;
+		esac
+	done
+	set -- "${args[@]}"
+	local name="$1"
+	if [[ -z "$name" ]]; then
+		echo "usage: kubep <name> [--cluster <eks-name>] [--region <r>] [--profile <p>] [--no-export]" >&2
+		return 1
+	fi
+	[[ -z "$cluster" ]] && cluster="$name"
+	if [[ -z "$profile" ]]; then
+		echo "kubep: AWS_PROFILE is unset and --profile not given. Run \`awsuse <p>\` first." >&2
+		return 1
+	fi
+
+	mkdir -p "$KUBE_CONFIGS_DIR"
+	local kc="$KUBE_CONFIGS_DIR/$name.yaml"
+
+	local cmd=(aws eks update-kubeconfig
+		--name "$cluster"
+		--alias "$name"
+		--kubeconfig "$kc"
+		--profile "$profile")
+	[[ -n "$region" ]] && cmd+=(--region "$region")
+
+	echo "→ ${cmd[*]}"
+	"${cmd[@]}" || return 1
+	chmod 600 "$kc"
+
+	if $export_kubeconfig; then
+		export KUBECONFIG="$kc"
+		echo "→ KUBECONFIG=$kc  (context: $name)"
+	else
+		echo "→ wrote $kc  (KUBECONFIG unchanged: ${KUBECONFIG:-<unset, using ~/.kube/config>})"
+	fi
+}
+
+kubeuse () {
+	local name="$1"
+	if [[ -z "$name" ]]; then
+		echo "usage: kubeuse <name> | kubeuse - | kubeuse --global" >&2
+		echo
+		echo "available per-cluster kubeconfigs in $KUBE_CONFIGS_DIR:"
+		if [[ -d "$KUBE_CONFIGS_DIR" ]]; then
+			for f in "$KUBE_CONFIGS_DIR"/*.yaml(N); do
+				echo "  - ${f:t:r}"
+			done
+		fi
+		return 1
+	fi
+	if [[ "$name" == "-" || "$name" == "--global" ]]; then
+		unset KUBECONFIG
+		echo "→ KUBECONFIG unset  (using global ~/.kube/config, current-context: $(kubectl config current-context 2>/dev/null || echo '<none>'))"
+		return 0
+	fi
+	local kc="$KUBE_CONFIGS_DIR/$name.yaml"
+	if [[ ! -f "$kc" ]]; then
+		echo "kubeuse: $kc not found. Run \`kubep $name\` first." >&2
+		return 1
+	fi
+	export KUBECONFIG="$kc"
+	echo "→ KUBECONFIG=$kc  (context: $(kubectl config current-context 2>/dev/null))"
+}
+
+kubewho () {
+	echo "KUBECONFIG=${KUBECONFIG:-<unset, using ~/.kube/config>}"
+	local ctx ns cluster server
+	ctx=$(kubectl config current-context 2>/dev/null)
+	if [[ -z "$ctx" ]]; then
+		echo "context: <none>"
+		return 0
+	fi
+	ns=$(kubectl config view --minify -o jsonpath='{..namespace}' 2>/dev/null)
+	cluster=$(kubectl config view --minify -o jsonpath='{.contexts[0].context.cluster}' 2>/dev/null)
+	server=$(kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}' 2>/dev/null)
+	echo "context:   $ctx"
+	echo "cluster:   $cluster"
+	echo "server:    $server"
+	echo "namespace: ${ns:-default}"
+	echo "AWS:       AWS_PROFILE=${AWS_PROFILE:-<unset>}"
+}
+
+kubeglobal () {
+	local ctx="$1"
+	if [[ -z "$ctx" ]]; then
+		echo "usage: kubeglobal <context>" >&2
+		echo
+		echo "current global context: $(KUBECONFIG=$HOME/.kube/config kubectl config current-context 2>/dev/null || echo '<none>')"
+		echo
+		echo "available contexts in ~/.kube/config:"
+		KUBECONFIG=$HOME/.kube/config kubectl config get-contexts -o name 2>/dev/null | sed 's/^/  - /'
+		return 1
+	fi
+	KUBECONFIG=$HOME/.kube/config kubectl config use-context "$ctx" || return 1
+	if [[ -n "${KUBECONFIG:-}" ]]; then
+		echo "note: KUBECONFIG is set in this shell ($KUBECONFIG), so global change won't affect it."
+		echo "      run \`kubeuse --global\` to drop the per-shell override."
+	fi
+}
