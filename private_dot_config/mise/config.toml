@@ -28,6 +28,7 @@ bottom = "latest"
 [settings]
 # Shell startup should never install tools or wait on remote version lookups.
 auto_install = false
+minimum_release_age = "14d"
 exec_auto_install = false
 not_found_auto_install = false
 task.run_auto_install = false
