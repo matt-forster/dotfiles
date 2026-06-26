@@ -1,14 +1,16 @@
-# Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# Inserts a blank line between shell prompts
 add_newline = true
 
-# Replace the '❯' symbol in the prompt with '➜'
-# [character] # The name of the module we are configuring is 'character'
-# success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = 'bold cyan'
 
-# Disable the package module, hiding it from the prompt completely
+[character]
+success_symbol = '[❯](green)'
+error_symbol = '[❯](red)'
+
 [package]
 disabled = true
 
@@ -25,13 +27,16 @@ disabled = true
 disabled = true
 
 [nodejs]
-format = '[($version )]($style)'
+symbol = ''
+format = '[$symbol($version )]($style)'
 
 [golang]
-format = '[($version )]($style)'
+symbol = ''
+format = '[$symbol($version )]($style)'
 
 [kubernetes]
 disabled = false
+symbol = '⎈ '
 format = '[$symbol$context( \($namespace\))]($style) '
 detect_folders = ['k8s', 'kube', 'overlays']
 detect_files = ['k9s.yaml']
@@ -48,9 +53,13 @@ context_pattern = "local.*"
 style = "bold green"
 
 [git_branch]
-format = '[$symbol$branch(:$remote_branch)]($style) '
-symbol = ''
-truncation_length = 25
+symbol = ''
+format = '[$branch(:$remote_branch)]($style) '
+truncation_length = 20
+
+[git_status]
+format = '[$all_status$ahead_behind]($style) '
+style = 'yellow'
 
 [git_metrics]
 disabled = false
@@ -59,5 +68,13 @@ disabled = false
 disabled = false
 symbol = ''
 allowed_msg = ''
-loaded_msg = '📂'
-format = '[$symbol$loaded $allowed]($style)' 
+loaded_msg = '✓'
+not_allowed_msg = '!'
+format = '[$loaded$allowed]($style) '
+
+[mise]
+disabled = false
+symbol = ''
+style = 'purple'
+format = '[$health]($style)'
+health_indicators = { healthy = '', unhealthy = '!' }
