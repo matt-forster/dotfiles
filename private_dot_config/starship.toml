@@ -39,6 +39,9 @@ format = '[$symbol($version )]($style)'
 [gcloud]
 format = 'on [$symbol$account(@$domain)(\($region\))]($style)'
 
+[aws]
+format = 'on [$symbol($profile)(\($region\))]($style)'
+
 [kubernetes]
 disabled = false
 symbol = '⎈'
