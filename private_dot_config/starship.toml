@@ -28,10 +28,12 @@ disabled = true
 
 [nodejs]
 symbol = ''
+version_format = 'v${major}.${minor}'
 format = '[$symbol($version )]($style)'
 
 [golang]
 symbol = ''
+version_format = 'v${major}.${minor}'
 format = '[$symbol($version )]($style)'
 
 [kubernetes]
