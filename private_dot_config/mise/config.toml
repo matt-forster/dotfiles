@@ -6,9 +6,11 @@ node = "26.0.0"
 deno = "2.8.2"
 terraform = "1.15.6"
 "npm:@agentmemory/agentmemory" = "0.9.27"
-"npm:@openai/codex" = "0.139.0"
+"npm:@openai/codex" = "latest"
 "npm:npm" = "11.17.0"
 "npm:nx" = "22.7.5"
+"npm:typescript-language-server" = "latest"
+"npm:typescript" = "latest"
 
 # Cross-platform CLI tools (installed via mise on all OS/distros)
 ripgrep = "latest"
