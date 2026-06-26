@@ -19,7 +19,7 @@ direnv = "latest"
 starship = "latest"
 lazygit = "latest"
 k9s = "latest"
-"cargo:git-cliff" = "latest"
+git-cliff = "latest"
 actionlint = "latest"
 bottom = "latest"
 
