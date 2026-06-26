@@ -1,0 +1,73 @@
+# AWS multi-account helpers.
+# Login holder profiles are named _<acct>; consumer profiles (used by Terraform,
+# AWS_PROFILE, etc) are named <acct> and credential_process from the holder.
+
+awsp() {
+  local export_profile=true
+  local args=()
+  for arg in "$@"; do
+    case "$arg" in
+      --no-export) export_profile=false ;;
+      -h|--help)
+        cat <<'EOF'
+usage: awsp <name> [--no-export]
+
+  Logs into AWS for account <name> (creates [profile _<name>] and
+  [profile <name>] in ~/.aws/config on first run). By default, also
+  exports AWS_PROFILE=<name> for the current shell.
+
+  --no-export   skip the export; use `awsuse <name>` later to activate
+EOF
+        return 0 ;;
+      *) args+=("$arg") ;;
+    esac
+  done
+  set -- "${args[@]}"
+
+  local acct="$1"
+  if [[ -z "$acct" ]]; then
+    echo "usage: awsp <name> [--no-export]" >&2
+    return 1
+  fi
+
+  local config="${AWS_CONFIG_FILE:-$HOME/.aws/config}"
+
+  aws login --profile "_$acct" || return 1
+
+  # Ensure [profile <acct>] exists and points at _<acct> (self-healing).
+  local expected="aws configure export-credentials --profile _$acct --format process"
+  local current
+  current=$(aws configure get credential_process --profile "$acct" 2>/dev/null)
+  if [[ "$current" != "$expected" ]]; then
+    if [[ -n "$current" ]]; then
+      echo "→ fixing [profile $acct] credential_process"
+      echo "    was: $current"
+      echo "    now: $expected"
+    else
+      echo "→ adding [profile $acct] credential_process"
+    fi
+    aws configure set credential_process "$expected" --profile "$acct"
+  fi
+
+  if $export_profile; then
+    export AWS_PROFILE="$acct"
+    echo "→ AWS_PROFILE=$acct  ($(aws sts get-caller-identity --query Account --output text 2>/dev/null))"
+  else
+    echo "→ logged in to _$acct  (AWS_PROFILE unchanged: ${AWS_PROFILE:-<unset>})"
+  fi
+}
+
+awsuse() {
+  local acct="$1"
+  if [[ -z "$acct" ]]; then
+    echo "usage: awsuse <name>" >&2
+    return 1
+  fi
+  export AWS_PROFILE="$acct"
+  echo "→ AWS_PROFILE=$acct  ($(aws sts get-caller-identity --query Account --output text 2>/dev/null))"
+}
+
+awswho() {
+  echo "AWS_PROFILE=${AWS_PROFILE:-<unset>}"
+  aws sts get-caller-identity 2>/dev/null
+}
