@@ -28,16 +28,21 @@ disabled = true
 
 [nodejs]
 symbol = ''
+version_format = 'v${major}.${minor}'
 format = '[$symbol($version )]($style)'
 
 [golang]
 symbol = ''
+version_format = 'v${major}.${minor}'
 format = '[$symbol($version )]($style)'
+
+[gcloud]
+format = 'on [$symbol$account(@$domain)(\($region\))]($style)'
 
 [kubernetes]
 disabled = false
-symbol = '⎈ '
-format = '[$symbol$context( \($namespace\))]($style) '
+symbol = '⎈'
+format = ' [$symbol$context( \($namespace\))]($style) '
 detect_folders = ['k8s', 'kube', 'overlays']
 detect_files = ['k9s.yaml']
 
