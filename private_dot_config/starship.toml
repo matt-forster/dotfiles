@@ -77,4 +77,5 @@ disabled = false
 symbol = ''
 style = 'purple'
 format = '[$health]($style)'
-health_indicators = { healthy = '', unhealthy = '!' }
+healthy_symbol = ''
+unhealthy_symbol = '!'
