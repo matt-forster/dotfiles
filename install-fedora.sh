@@ -15,9 +15,17 @@ latest_release() {
 }
 
 echo '⏳ Installing dnf packages...'
+
+# On Amazon Linux, curl-minimal is pre-installed and conflicts with the full
+# curl package.  Only request curl when curl-minimal is not present.
+CURL_PKG="curl"
+if rpm -q curl-minimal &>/dev/null; then
+  CURL_PKG=""
+fi
+
 sudo dnf install -y \
   cmake \
-  curl \
+  ${CURL_PKG:+"$CURL_PKG"} \
   git \
   gnupg2 \
   graphviz \
@@ -96,6 +104,28 @@ if ! command -v buildkite-agent &>/dev/null; then
     | tar -C "$TMP" -xz
   sudo install "$TMP/buildkite-agent" "$BIN_DIR/buildkite-agent"
   echo '✅ Buildkite agent installed'
+fi
+
+# ── Set default shell to zsh ────────────────────────────────────────
+if command -v zsh &>/dev/null; then
+  ZSH_PATH="$(command -v zsh)"
+  CURRENT_SHELL="$(getent passwd "$(whoami)" 2>/dev/null | cut -d: -f7 || true)"
+  if [ -n "$CURRENT_SHELL" ] && [ "$CURRENT_SHELL" != "$ZSH_PATH" ]; then
+    if ! grep -qx "$ZSH_PATH" /etc/shells 2>/dev/null; then
+      echo "$ZSH_PATH" | sudo tee -a /etc/shells >/dev/null 2>&1 || true
+    fi
+    if command -v chsh &>/dev/null; then
+      echo "⏳ Changing default shell to zsh"
+      if ! sudo chsh -s "$ZSH_PATH" "$(whoami)" 2>/dev/null && \
+         ! chsh -s "$ZSH_PATH" 2>/dev/null; then
+        echo "⚠️  Could not change shell to zsh (no permission). Run: chsh -s $ZSH_PATH"
+      else
+        echo "✅ Default shell changed to zsh"
+      fi
+    fi
+  elif [ -z "$CURRENT_SHELL" ]; then
+    echo "⚠️  Could not detect current shell; skipping chsh"
+  fi
 fi
 
 echo ''
