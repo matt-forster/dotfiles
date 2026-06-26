@@ -61,3 +61,10 @@ symbol = ''
 allowed_msg = ''
 loaded_msg = '📂'
 format = '[$symbol$loaded $allowed]($style)' 
+
+[mise]
+disabled = false
+symbol = 'mise '
+style = 'bold purple'
+format = 'on [$symbol$health]($style) '
+health_indicators = { healthy = '', unhealthy = '*' }
