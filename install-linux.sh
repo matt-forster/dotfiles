@@ -83,6 +83,24 @@ if ! command -v docker &>/dev/null; then
   echo '✅ Docker installed (re-login required for group membership)'
 fi
 
+# ── kubectl ─────────────────────────────────────────────────────────
+if ! command -v kubectl &>/dev/null; then
+  echo '⏳ Installing kubectl...'
+  K8S_VERSION=$(curl -fsSL https://dl.k8s.io/release/stable.txt)
+  curl -fsSL "https://dl.k8s.io/release/${K8S_VERSION}/bin/linux/amd64/kubectl" -o "$TMP/kubectl"
+  sudo install -m 0755 "$TMP/kubectl" "$BIN_DIR/kubectl"
+  echo '✅ kubectl installed'
+fi
+
+# ── AWS CLI v2 ──────────────────────────────────────────────────────
+if ! command -v aws &>/dev/null; then
+  echo '⏳ Installing AWS CLI...'
+  curl -fsSL "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "$TMP/awscliv2.zip"
+  unzip -q "$TMP/awscliv2.zip" -d "$TMP"
+  sudo "$TMP/aws/install"
+  echo '✅ AWS CLI installed'
+fi
+
 # ── Buildkite agent ─────────────────────────────────────────────────
 if ! command -v buildkite-agent &>/dev/null; then
   echo '⏳ Installing Buildkite agent...'
@@ -93,6 +111,28 @@ if ! command -v buildkite-agent &>/dev/null; then
   sudo apt-get update -qq
   sudo apt-get install -y buildkite-agent
   echo '✅ Buildkite agent installed'
+fi
+
+# ── Set default shell to zsh ────────────────────────────────────────
+if command -v zsh &>/dev/null; then
+  ZSH_PATH="$(command -v zsh)"
+  CURRENT_SHELL="$(getent passwd "$(whoami)" 2>/dev/null | cut -d: -f7 || true)"
+  if [ -n "$CURRENT_SHELL" ] && [ "$CURRENT_SHELL" != "$ZSH_PATH" ]; then
+    if ! grep -qx "$ZSH_PATH" /etc/shells 2>/dev/null; then
+      echo "$ZSH_PATH" | sudo tee -a /etc/shells >/dev/null 2>&1 || true
+    fi
+    if command -v chsh &>/dev/null; then
+      echo "⏳ Changing default shell to zsh"
+      if ! sudo chsh -s "$ZSH_PATH" "$(whoami)" 2>/dev/null && \
+         ! chsh -s "$ZSH_PATH" 2>/dev/null; then
+        echo "⚠️  Could not change shell to zsh (no permission). Run: chsh -s $ZSH_PATH"
+      else
+        echo "✅ Default shell changed to zsh"
+      fi
+    fi
+  elif [ -z "$CURRENT_SHELL" ]; then
+    echo "⚠️  Could not detect current shell; skipping chsh"
+  fi
 fi
 
 echo ''
