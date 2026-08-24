@@ -17,6 +17,9 @@ disabled = true
 [ruby]
 disabled = true
 
+[dotnet]
+disabled = true
+
 [nix_shell]
 disabled = true
 
